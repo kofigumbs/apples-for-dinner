@@ -12,8 +12,8 @@
       gtag('config', 'UA-122277166-1');
     </script>
 
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css" integrity="sha256-zIG416V1ynj3Wgju/scU80KAEWOsO5rRLfVyRDuOv7Q=" crossorigin="anonymous" />
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css" integrity="sha256-zIG416V1ynj3Wgju/scU80KAEWOsO5rRLfVyRDuOv7Q=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 
     <meta charset="utf-8">
     <link rel="canonical" href="https://applesfordinner.com" />
@@ -30,33 +30,43 @@
     <meta name="theme-color" content="#333333">
     -->
     <style>
-			.hero-image {
-				background-image: url(/hero.jpg);
-				background-size: cover;
-				background-repeat: no-repeat;
-			}
-			.hero-image > * {
-				transform: translateY(-9em);
-			}
+      .hero-image {
+        background-image: url(/hero.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+      }
+      .hero-image > * {
+        transform: translateY(-9em);
+      }
     </style>
   </head>
   <body>
     <div class="hero is-fullheight">
-			<div class="hero-body hero-image">
-				<div class="container">
-					<h1 class="title is-1">Seasonal refreshment <br>for your <mark id="home">home</mark></h1>
-					<div class="buttons">
-						<a class="button is-large is-text" href="#learn">Learn more
+      <div class="hero-body hero-image">
+        <div class="container">
+          <h1 class="title is-1">Seasonal refreshment
+            <br> for your <mark id="tagline">home</mark>
+          </h1>
+          <div class="buttons">
+            <a class="button is-large is-text" href="#learn">Learn more
               <span class="icon"><i class="fas fa-level-down-alt"></i></span>
-						</a>
-					</div>
-				</div>
-			</div>
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
-		<div class="section" id="learn">
-			<div class="container">
-				Hello
-			</div>
+    <div class="section" id="learn">
+      <div class="container">
+        Hello
+      </div>
     </div>
+    <script>
+      var taglines = ["apartment", "office", "condo", "airbnb", "dorm", "home"];
+      var taglineIndex = 0;
+      var taglineEl = document.getElementById("tagline");
+      setInterval(function() {
+        taglineEl.innerHTML = taglines[taglineIndex++ % taglines.length];
+      }, 1500);
+    </script>
   </body>
 </html>
