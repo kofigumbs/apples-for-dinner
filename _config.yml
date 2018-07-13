@@ -1,3 +1,9 @@
 title: Apples for Dinner
 description: Seasonal refreshment for your home
 url: applesfordinner.com
+defaults:
+  -
+    scope:
+      path: ""
+    values:
+      layout: "default"
