@@ -13,23 +13,59 @@ styles: |
   }
 ---
 <div class="hero is-fullheight">
-  <div class="hero-body hero-image index">
+  <div class="hero-body hero-image">
     <div class="container">
-      <h1 class="title is-1">Seasonal refreshment
-        <br> for your <mark id="tagline">home</mark>
+      <h1 class="title is-1">Curated art
+        <br>for your <mark id="tagline">home</mark>
       </h1>
-      <div class="buttons">
-        <a class="button is-large is-text" href="#learn">Learn more
-          <span class="icon"><i class="fas fa-level-down-alt"></i></span>
-        </a>
+      <p class="is-size-5">4 new pieces <strong>every season</strong> — $15 / month</p>
+      <br>
+      <a class="button is-large is-white" href="/profile">Sign Up</a>
+    </div>
+  </div>
+</div>
+
+<div class="hero is-fullheight">
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <h2 class="subtitle is-1">Simple</h2>
+      <div class="columns">
+        <div class="column">
+          <div class="notification is-white">
+            <span class="icon is-large"><i class="fas fa-user fa-2x"></i></span>
+            <h3 class="title is-4">Tell us what you like</h3>
+            <p>
+              Take our short quiz so that we can get to know you.
+              Is nature? cityscapes? abstract lighting? We curate
+              photography of all kinds to find sets <strong>just for you</strong>.
+            </p>
+          </div>
+        </div>
+        <div class="column">
+          <div class="notification is-light">
+            <span class="icon is-large"><i class="fas fa-box-open fa-2x"></i></span>
+            <h3 class="title is-4">Get your framed photos</h3>
+            <p>
+              Your first package will include <strong>4 photos and 4 frames</strong>.
+              After that, you'll get new photos with the season based on your tastes.
+              You <strong>keep the old photos</strong> for your personal collection!
+            </p>
+          </div>
+        </div>
+        <div class="column">
+          <div class="notification is-white">
+            <span class="icon is-large"><i class="fas fa-ellipsis-h fa-2x"></i></span>
+            <h3 class="title is-4">That's it</h3>
+            <p>We really did try to come up with a third step, but we just couldn't.</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
-<div class="section" id="learn">
-</div>
+
 <script>
-  var taglines = ["apartment", "office", "condo", "airbnb", "dorm", "home"];
+  var taglines = ["office", "condo", "airbnb", "dorm", "apartment", "home"];
   var taglineIndex = 0;
   var taglineEl = document.getElementById("tagline");
   setInterval(function() {
