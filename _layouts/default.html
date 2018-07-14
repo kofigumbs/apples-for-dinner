@@ -23,7 +23,48 @@
     <meta name="msapplication-config" content="/icons/browserconfig.xml">
     <meta name="theme-color" content="#333333">
     -->
-    <style>{{ page.styles }}</style>
+    <style>
+    {{ page.styles }}
+    .footer-columns {
+      width: 100%;
+    }
+    .vcenter {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 100%;
+    }
+    </style>
   </head>
-  <body>{{ content }}</body>
+  <body>
+    {{ content }}
+    <footer class="hero is-dark is-medium">
+      <div class="hero-body">
+        <div class="footer-columns">
+          <div class="columns is-centered">
+            {% if page.url != '/profile.html' %}
+            <div class="column is-one-third has-text-right">
+              <div class="vcenter">
+                <div><a class="button is-large" href="profile">Sign Up</a></div>
+              </div>
+            </div>
+            {% endif %}
+            <div class="column is-one-third">
+              <h1 class="title is-1">Want to learn more?</h1>
+              <p class="subtitle">Contact us at <u><a href="mailto:team@applesfordinner.com">team@applesfordinner.com</a></u></p>
+              <hr>
+              <div class="is-pulled-right">
+                <u><a href="/">Home</a></u>
+              </div>
+              <div>
+                <p>Apples for Dinner, LLC</p>
+                <p>© 2018</p>
+                <p>Chicago, IL</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>
