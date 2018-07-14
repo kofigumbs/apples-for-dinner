@@ -3,10 +3,10 @@ photo_credits: Becca Tapert
 styles: |
   .main-columns {
     margin: 0;
-    min-height: 100vh;
     margin-bottom: 0 !important;
   }
   .hero-image {
+    height: 100vh;
     background-image: url(/images/profile-hero.jpg);
     background-size: cover;
     background-repeat: no-repeat;
@@ -24,8 +24,16 @@ styles: |
       <h1 class="title is-1">Enough about us.<br>Let's hear about you!</h1>
     </div>
   </div>
+
   <div class="column is-one-half">
     <div class="section">
+      <noscript>
+        <div class="notification is-danger">
+          This page requires JavaScript. Please change your browser settings then refresh.
+        </div>
+        <br>
+      </noscript>
+
       <form action="https://www.paypal.com/cgi-bin/webscr" method="POST">
         <input type="hidden" name="charset" value="utf-8">
         <input type="hidden" name="custom" id="model" value="{}">
@@ -35,9 +43,21 @@ styles: |
         <div class="field">
           <label class="label">Email address</label>
           <div class="control has-icons-left">
-            <input required class="input" type="email" oninput="update('email', this)" placeholder="sam@example.com">
+            <input required class="input" type="email" oninput="update('email', 'value', this)" placeholder="sam@example.com">
             <span class="icon is-small is-left"><i class="fas fa-envelope"></i></span>
           </div>
+        </div>
+
+        <div class="columns is-multiline is-mobile">
+          {% include profile-option.html name="abstract" dimmensions="3by4" %}
+          {% include profile-option.html name="animal" dimmensions="3by4" %}
+          {% include profile-option.html name="architecture" dimmensions="3by4" %}
+          {% include profile-option.html name="techonology" dimmensions="3by4" %}
+          {% include profile-option.html name="food" dimmensions="3by4" %}
+          {% include profile-option.html name="nature" dimmensions="3by4" %}
+          {% include profile-option.html name="city" dimmensions="4by3" %}
+          {% include profile-option.html name="people" dimmensions="4by3" %}
+          {% include profile-option.html name="words" dimmensions="4by3" %}
         </div>
 
         <div class="field">
@@ -54,10 +74,10 @@ styles: |
 </div>
 
 <script>
-  function update(field, el) {
-    var custom = document.getElementById("model");
-    var model = JSON.parse(custom.value);
-    model[field] = el.value;
+  var custom = document.getElementById("model");
+  var model = JSON.parse(custom.value);
+  function update(field, getter, el) {
+    model[field] = el[getter];
     custom.value = JSON.stringify(model);
   }
 </script>

@@ -1,0 +1,17 @@
+<div class="column is-one-third-desktop is-half-mobile">
+  <div class="card">
+    <div class="card-image">
+      <figure class="image is-4by3">
+        <img src="/images/profile-option-{{ include.name }}.jpg" alt="{{ include.name }} picture">
+      </figure>
+    </div>
+    <div class="card-content">
+      <div class=".inline-block">
+        <label class="checkbox">
+          <input type="checkbox" name="{{ include.name }}" onchange="update('likes-{{ include.name }}', 'checked', this)" data-com.agilebits.onepassword.user-edited="yes">
+          {{ include.name | capitalize }}
+        </label>
+      </div>
+    </div>
+  </div>
+</div>
