@@ -8,7 +8,7 @@
     <div class="card-content">
       <div class=".inline-block">
         <label class="checkbox">
-          <input type="checkbox" name="{{ include.name }}" onchange="update('likes-{{ include.name }}', 'checked', this)" data-com.agilebits.onepassword.user-edited="yes">
+          <input type="checkbox" onchange="update('likes-{{ include.name }}', 'checked', this)">
           {{ include.name | capitalize }}
         </label>
       </div>

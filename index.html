@@ -10,7 +10,7 @@ styles: |
     background-repeat: no-repeat;
   }
   .hero-image > * {
-    transform: translateY(-9em);
+    transform: translateY(-5em);
   }
   .banner-image {
     background-image: url(/images/index-banner.jpg);
@@ -21,6 +21,15 @@ styles: |
   .banner-text {
     margin: 0 2em;
     word-wrap: break-word;
+  }
+  .banner-pricing {
+    margin-bottom: 0 !important;
+  }
+  .banner-pricing > * {
+    height: 25em;
+  }
+  .align-center {
+    align-items: center;
   }
 ---
 <section class="hero is-fullheight">
@@ -81,33 +90,34 @@ styles: |
   <div class="column is-half banner-image"></div>
   <br>
   <div class="column is-half">
-    <div class="banner-text vcenter">
+    <div class="banner-text vcenter ">
       <h2 class="title is-1">The fine print</h2>
       <div class="content">
         <ul>
           <li>Our frames are black, matte-less, and 8" x 10"</li>
           <li>Expect your first delivery to arrive 4-5 business days after payment</li>
-          <li>Our quiz respects your privacy — tell us as much or as little as you like</li>
           <li>We hope you love it, but you can cancel your subscription at any time</li>
-          <li>Yes, <strong>Apples for Dinner makes a great gift</strong></li>
+          <li><strong>Apples for Dinner makes a great gift</strong></li>
         </ul>
       </div>
     </div>
   </div>
 </section>
 
-<section class="hero is-medium">
-  <div class="hero-body">
-    <div class="columns is-centered">
-      <div class="column is-three-quarters">
-        <div class="notification has-text-centered">
-          <h2 class="subtitle is-2  has-text-weight-light">
-            Discover your next
-            <br><strong><mark data-tags='["conversation starter", "personal aesthetic"]'>favorite artist</mark></strong>
-            <br>at an affordable price
-          </h2>
-        </div>
-      </div>
+<section class="columns banner-pricing">
+  <div class="column is-half">
+    <div class="vcenter align-center">
+      <h2 class="title is-1">$15</h2>
+      <h3 class="subtitle">per month</h3>
+      <a class="button is-dark is-large" href="/profile">Sign Up</a>
+    </div>
+  </div>
+  <div class="column is-half has-background-light">
+    <div class="vcenter banner-text has-text-centered">
+      <h2 class="subtitle is-2  has-text-weight-light">
+        Discover your next
+        <br><strong><mark data-tags='["conversation starter", "personal aesthetic"]'>favorite artist</mark></strong>
+      </h2>
     </div>
   </div>
 </section>
