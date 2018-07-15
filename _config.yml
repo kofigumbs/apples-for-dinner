@@ -1,5 +1,5 @@
 title: Apples for Dinner
-description: Seasonal refreshment for your home
+description: Curated art delivered seasonally
 url: applesfordinner.com
 defaults:
   -
@@ -7,3 +7,5 @@ defaults:
       path: ""
     values:
       layout: "default"
+plugins:
+  - jekyll-seo-tag
