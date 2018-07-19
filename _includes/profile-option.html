@@ -6,10 +6,11 @@
       </figure>
     </div>
     <div class="card-content">
-      <div class=".inline-block">
+      <div class="has-text-centered">
         <label class="checkbox">
-          <input type="checkbox" onchange="update('likes-{{ include.name }}', 'checked', this)">
-          {{ include.name | capitalize }}
+          <input
+            type="checkbox"
+            onchange="update({ tag: 'check', name: '{{ include.name }}', value: this.checked })">
         </label>
       </div>
     </div>

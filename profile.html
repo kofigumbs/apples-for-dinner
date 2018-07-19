@@ -37,45 +37,63 @@ styles: |
       </noscript>
 
       {% if jekyll.environment == "production" %}
-      <form action="https://www.paypal.com/cgi-bin/webscr" method="POST">
+      <form action="https://www.paypal.com/cgi-bin/webscr" method="POST" onsubmit="return presubmit()">
         <input type="hidden" name="hosted_button_id" value="K2Q2RSWRGVRXY">
       {% else %}
-      <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="POST">
+      <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="POST" onsubmit="return presubmit()">
         <input type="hidden" name="hosted_button_id" value="4TJRU4BWR6VUE">
       {% endif %}
 
         <input type="hidden" name="cmd" value="_s-xclick">
         <input type="hidden" name="charset" value="utf-8">
-        <input type="hidden" name="custom" id="model" value="{}">
+        <input type="hidden" name="custom" id="custom">
 
         <div class="field">
           <label class="label">What kind of space are you styling?</label>
           <div class="control has-icons-left">
-            <input class="input" type="text" oninput="update('space', 'value', this)" placeholder="Living room">
+            <input
+              class="input"
+              type="text"
+              placeholder="Living room"
+              oninput="update({ tag: 'input-space', value: this.value })">
             <span class="icon is-small is-left"><i class="fas fa-door-open"></i></span>
           </div>
         </div>
 
         <div class="field">
-          <label class="label">What themes define your space?</label>
-          <div class="control has-icons-left">
-            <input class="input" type="text" oninput="update('themes', 'value', this)" placeholder="Grey walls with large, tan couches">
-            <span class="icon is-small is-left"><i class="fas fa-couch"></i></span>
+          <label class="label">What kind of art would you like?</label>
+          <div class="control">
+            <div class="select">
+              <select oninput="update({ tag: 'select', value: this.value })">
+                <option disabled selected hidden></option>
+                <option value="samples">Pick from samples</option>
+                <option value="description">Tell us with words</option>
+                <option value="surprise">Start with a surprise</option>
+              </select>
+            </div>
           </div>
         </div>
 
-        <div class="field">
-          <label class="label">How would you describe your personality?</label>
+        <div class="field is-hidden" id="description">
+          <div class="notification">
+            <i>I enjoy spending time outdoors, by water in particular.
+            I think I'd want to start with serene pictures of nature.
+            Most of my furniture is light beige,
+            so I'd want the photos to match that.</i>
+            <p class="has-text-right">
+              — Sam
+              <span class="icon is-small"><i class="fas fa-user"></i></span>
+            </p>
+          </div>
           <div class="control has-icons-left">
             <textarea
               class="textarea"
-              oninput="update('personality', 'value', this)"
-              placeholder="I enjoy spending time outdoors, by water in particular..."></textarea>
+              placeholder="Tell us as much or as little as you like..."
+              oninput="update({ tag: 'input-description', value: this.value })"></textarea>
           </div>
         </div>
 
-        <div class="field">
-          <label class="label">Which topics appeal to you?</label>
+        <div class="field is-hidden" id="samples">
           <div class="columns is-multiline is-mobile">
             {% include profile-option.html name="abstract" dimmensions="3by4" %}
             {% include profile-option.html name="animal" dimmensions="3by4" %}
@@ -89,8 +107,15 @@ styles: |
           </div>
         </div>
 
+        <div class="field is-hidden" id="surprise">
+          <div class="control">
+            <div class="notification">
+              OK! We'll send you some of our favorites then get your feedback.
+            </div>
+          </div>
+        </div>
         <br>
-        <div class="field">
+        <div class="field is-hidden" id="submit">
           <div class="control">
             <button class="button is-link is-large" type="submit" title="Subscribe with PayPal">
               <span class="icon is-large"><i class="fab fa-paypal"></i></span>
@@ -104,10 +129,52 @@ styles: |
 </div>
 
 <script>
-  var custom = document.getElementById("model");
-  var model = JSON.parse(custom.value);
-  function update(field, getter, el) {
-    model[field] = el[getter];
-    custom.value = JSON.stringify(model);
+  var model = {
+    art: {
+      samples: [],
+      description: "",
+      surprise: "surprise",
+    },
+    space: "",
+    selected: null,
+  };
+
+  function update(msg) {
+    switch (msg.tag) {
+      case "select":
+        model.selected = msg.value;
+        Object.keys(model.art).forEach(function(value) {
+          document
+            .getElementById(value)
+            .classList
+            .toggle("is-hidden", value !== model.selected);
+        });
+        document.getElementById("submit").classList.remove("is-hidden");
+        break;
+
+      case "input-space":
+        model.space = msg.value;
+        break;
+
+      case "input-description":
+        model.art.description = msg.value;
+        break;
+
+      case "check":
+        if (msg.value)
+          model.art.samples.push(msg.name);
+        else
+          model.art.samples = model.art.samples.filter(function(name) {
+            return name !== msg.name
+          });
+        break;
+    }
+    console.log(model);
+  }
+
+  function presubmit() {
+    var custom = JSON.stringify([ model.space, model.art[model.selected] ]);
+    document.getElementById("custom").value = custom;
+    return true;
   }
 </script>
