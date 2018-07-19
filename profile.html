@@ -37,25 +37,21 @@ styles: |
       </noscript>
 
       {% if jekyll.environment == "production" %}
-      <form action="https://www.paypal.com/cgi-bin/webscr" method="POST" onsubmit="return presubmit()">
+      <form action="https://www.paypal.com/cgi-bin/webscr" method="POST" onsubmit="presubmit(); return true">
         <input type="hidden" name="hosted_button_id" value="K2Q2RSWRGVRXY">
       {% else %}
-      <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="POST" onsubmit="return presubmit()">
+      <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="POST" onsubmit="presubmit(); return true">
         <input type="hidden" name="hosted_button_id" value="4TJRU4BWR6VUE">
       {% endif %}
 
         <input type="hidden" name="cmd" value="_s-xclick">
         <input type="hidden" name="charset" value="utf-8">
-        <input type="hidden" name="custom" id="custom">
+        <input type="hidden" name="custom" id="custom-input">
 
         <div class="field">
           <label class="label">What kind of space are you styling?</label>
           <div class="control has-icons-left">
-            <input
-              class="input"
-              type="text"
-              placeholder="Living room"
-              oninput="update({ tag: 'input-space', value: this.value })">
+            <input class="input" type="text" placeholder="Living room" id="space-input">
             <span class="icon is-small is-left"><i class="fas fa-door-open"></i></span>
           </div>
         </div>
@@ -64,7 +60,7 @@ styles: |
           <label class="label">What kind of art would you like?</label>
           <div class="control">
             <div class="select">
-              <select oninput="update({ tag: 'select', value: this.value })">
+              <select oninput="select(this.value)" id="art-select">
                 <option disabled selected hidden></option>
                 <option value="samples">Pick from samples</option>
                 <option value="description">Tell us with words</option>
@@ -89,7 +85,7 @@ styles: |
             <textarea
               class="textarea"
               placeholder="Tell us as much or as little as you like..."
-              oninput="update({ tag: 'input-description', value: this.value })"></textarea>
+              id="description-input"></textarea>
           </div>
         </div>
 
@@ -129,52 +125,31 @@ styles: |
 </div>
 
 <script>
-  var model = {
-    art: {
-      samples: [],
-      description: "",
-      surprise: "surprise",
-    },
-    space: "",
-    selected: null,
-  };
-
-  function update(msg) {
-    switch (msg.tag) {
-      case "select":
-        model.selected = msg.value;
-        Object.keys(model.art).forEach(function(value) {
-          document
-            .getElementById(value)
-            .classList
-            .toggle("is-hidden", value !== model.selected);
-        });
-        document.getElementById("submit").classList.remove("is-hidden");
-        break;
-
-      case "input-space":
-        model.space = msg.value;
-        break;
-
-      case "input-description":
-        model.art.description = msg.value;
-        break;
-
-      case "check":
-        if (msg.value)
-          model.art.samples.push(msg.name);
-        else
-          model.art.samples = model.art.samples.filter(function(name) {
-            return name !== msg.name
-          });
-        break;
-    }
-    console.log(model);
+  function select(art) {
+    ["samples", "description", "surprise"].forEach(function(value) {
+      document.getElementById(value).classList.toggle("is-hidden", value !== art);
+    });
+    document.getElementById("submit").classList.remove("is-hidden");
   }
 
   function presubmit() {
-    var custom = JSON.stringify([ model.space, model.art[model.selected] ]);
-    document.getElementById("custom").value = custom;
-    return true;
+    document.getElementById("custom-input").value = JSON.stringify([
+      document.getElementById("space-input").value, getArt()
+    ]);
+  }
+
+  function getArt() {
+    switch (document.getElementById("art-select").value) {
+      case "samples":
+        return Array
+          .from(document.querySelectorAll("#samples input:checked"))
+          .map(function(checkbox) { return checkbox.id });
+
+      case "description":
+        return document.getElementById("description-input").value;
+
+      case "surprise":
+        return "surprise";
+    }
   }
 </script>
