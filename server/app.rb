@@ -1,9 +1,11 @@
 require "json"
+require "logger"
 require "net/http"
 require "sinatra"
 
 API_KEY = ENV.fetch "AIRTABLE_API_KEY"
 TABLE_URL = URI("https://api.airtable.com/v0/appOOHY2yfP6zFXzf/Webhook")
+LOG = Logger.new(STDOUT)
 
 def on_sale
   payload = JSON.parse(request.body.read)
@@ -13,6 +15,7 @@ end
 post "/webhook" do
   on_sale do |resource|
     custom = JSON.parse resource["custom"]
+    LOG.info custom
     record = {
       "fields" => {
         "Transaction ID" => resource["id"],
@@ -27,6 +30,7 @@ post "/webhook" do
         record.to_json,
         "Content-Type" => "application/json",
         "Authorization" => "Bearer #{API_KEY}")
+      LOG.info response.read_body
     end
   end
 end
