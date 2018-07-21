@@ -9,3 +9,6 @@ defaults:
       layout: "default"
 plugins:
   - jekyll-seo-tag
+
+exclude:
+  - server
