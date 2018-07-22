@@ -3,25 +3,23 @@ require "logger"
 require "net/http"
 require "sinatra"
 
+LOG = Logger.new STDOUT
 API_KEY = ENV.fetch "AIRTABLE_API_KEY"
-TABLE_URL = URI("https://api.airtable.com/v0/appOOHY2yfP6zFXzf/Webhook")
-LOG = Logger.new(STDOUT)
+TABLE_URL = URI "https://api.airtable.com/v0/appOOHY2yfP6zFXzf/Webhook"
 
 def on_sale
-  payload = JSON.parse(request.body.read)
-  yield payload["resource"] if payload["event_type"] == "PAYMENT.SALE.COMPLETED"
+  LOG.info request.POST
+  yield request.POST["resource"] if request.POST["event_type"] == "PAYMENT.SALE.COMPLETED"
 end
 
 post "/webhook" do
   on_sale do |resource|
     custom = JSON.parse resource["custom"]
-    LOG.info custom
     record = {
       "fields" => {
-        "Transaction ID" => resource["id"],
-        "Start" => resource["create_time"],
+        "Subscriber ID" => resource["subscr_id"],
         "Room" => custom.first,
-        "Art" => custom.last.to_s,
+        "Art" => custom.last,
       }
     }
     Net::HTTP.start(TABLE_URL.hostname, TABLE_URL.port, use_ssl: true) do |http|
