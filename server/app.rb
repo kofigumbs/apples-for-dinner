@@ -7,29 +7,21 @@ LOG = Logger.new STDOUT
 API_KEY = ENV.fetch "AIRTABLE_API_KEY"
 TABLE_URL = URI "https://api.airtable.com/v0/appOOHY2yfP6zFXzf/Webhook"
 
-def on_signup
-  LOG.info request.POST
-  yield request.POST if request.POST["txn_type"] == "subscr_signup"
-end
-
 post "/webhook" do
-  on_signup do |payload|
-    custom = JSON.parse payload["custom"]
-    record = {
-      "fields" => {
-        "Test" => payload["test_ipn"].to_i == 1,
-        "Subscriber ID" => payload["subscr_id"],
-        "Room" => custom.first,
-        "Art" => custom.last,
-      }
+  record = {
+    "fields" => {
+      "Subscriber ID" => request.POST["subscr_id"],
+      "Transaction" => request.POST["txn_type"],
+      "Custom" => request.POST["custom"],
+      "Test" => request.POST["test_ipn"].to_i == 1,
     }
-    Net::HTTP.start(TABLE_URL.hostname, TABLE_URL.port, use_ssl: true) do |http|
-      response = http.post(
-        TABLE_URL.path,
-        record.to_json,
-        "Content-Type" => "application/json",
-        "Authorization" => "Bearer #{API_KEY}")
-      LOG.info response.read_body
-    end
+  }
+  Net::HTTP.start(TABLE_URL.hostname, TABLE_URL.port, use_ssl: true) do |http|
+    response = http.post(
+      TABLE_URL.path,
+      record.to_json,
+      "Content-Type" => "application/json",
+      "Authorization" => "Bearer #{API_KEY}")
+    LOG.info response.read_body
   end
 end
