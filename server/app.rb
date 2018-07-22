@@ -17,6 +17,7 @@ post "/webhook" do
     custom = JSON.parse payload["custom"]
     record = {
       "fields" => {
+        "Test" => payload["test_ipn"].to_i == 1,
         "Subscriber ID" => payload["subscr_id"],
         "Room" => custom.first,
         "Art" => custom.last,
