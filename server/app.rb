@@ -7,17 +7,17 @@ LOG = Logger.new STDOUT
 API_KEY = ENV.fetch "AIRTABLE_API_KEY"
 TABLE_URL = URI "https://api.airtable.com/v0/appOOHY2yfP6zFXzf/Webhook"
 
-def on_sale
+def on_signup
   LOG.info request.POST
-  yield request.POST["resource"] if request.POST["event_type"] == "PAYMENT.SALE.COMPLETED"
+  yield request.POST if request.POST["txn_type"] == "subscr_signup"
 end
 
 post "/webhook" do
-  on_sale do |resource|
-    custom = JSON.parse resource["custom"]
+  on_signup do |payload|
+    custom = JSON.parse payload["custom"]
     record = {
       "fields" => {
-        "Subscriber ID" => resource["subscr_id"],
+        "Subscriber ID" => payload["subscr_id"],
         "Room" => custom.first,
         "Art" => custom.last,
       }
