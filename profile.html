@@ -51,7 +51,7 @@ styles: |
         <div class="field">
           <label class="label">What kind of space are you styling?</label>
           <div class="control has-icons-left">
-            <input class="input" type="text" placeholder="Living room" id="space-input">
+            <input required class="input" type="text" placeholder="Living room" id="space-input">
             <span class="icon is-small is-left"><i class="fas fa-door-open"></i></span>
           </div>
         </div>
@@ -59,14 +59,20 @@ styles: |
         <div class="field">
           <label class="label">What kind of art would you like?</label>
           <div class="control">
-            <div class="select">
-              <select oninput="select(this.value)" id="art-select">
-                <option disabled selected hidden></option>
-                <option value="samples">Pick from samples</option>
-                <option value="description">Tell us with words</option>
-                <option value="surprise">Start with a surprise</option>
-              </select>
-            </div>
+            <label class="radio" onclick="select('samples')">
+              <input type="radio" name="art">
+              Pick from samples
+            </label>
+            <br>
+            <label class="radio" onclick="select('description')">
+              <input type="radio" name="art">
+              Use your own words
+            </label>
+            <br>
+            <label class="radio" onclick="select('surprise')">
+              <input type="radio" name="art">
+              Start with a surprise
+            </label>
           </div>
         </div>
 
@@ -125,7 +131,10 @@ styles: |
 </div>
 
 <script>
-  function select(art) {
+  var art;
+
+  function select(newArt) {
+    art = newArt;
     ["samples", "description", "surprise"].forEach(function(value) {
       document.getElementById(value).classList.toggle("is-hidden", value !== art);
     });
@@ -139,11 +148,12 @@ styles: |
   }
 
   function getArt() {
-    switch (document.getElementById("art-select").value) {
+    switch (art) {
       case "samples":
         return Array
           .from(document.querySelectorAll("#samples input:checked"))
-          .map(function(checkbox) { return checkbox.id });
+          .map(function(checkbox) { return checkbox.id })
+          .toString();
 
       case "description":
         return document.getElementById("description-input").value;
