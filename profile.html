@@ -37,21 +37,23 @@ styles: |
       </noscript>
 
       {% if jekyll.environment == "production" %}
-      <form action="https://www.paypal.com/cgi-bin/webscr" method="POST" onsubmit="presubmit(); return true">
+      <form action="https://www.paypal.com/cgi-bin/webscr" method="POST" onsubmit="return presubmit()">
         <input type="hidden" name="hosted_button_id" value="K2Q2RSWRGVRXY">
       {% else %}
-      <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="POST" onsubmit="presubmit(); return true">
+      <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="POST" onsubmit="return presubmit()">
         <input type="hidden" name="hosted_button_id" value="4TJRU4BWR6VUE">
       {% endif %}
 
         <input type="hidden" name="cmd" value="_s-xclick">
         <input type="hidden" name="charset" value="utf-8">
-        <input type="hidden" name="custom" id="custom-input">
+        <input type="hidden" name="on0" value="Space">
+        <input type="hidden" name="on1" value="Preferences">
+        <input type="hidden" name="os1">
 
         <div class="field">
           <label class="label">What kind of space are you styling?</label>
           <div class="control has-icons-left">
-            <input required class="input" type="text" placeholder="Living room" id="space-input">
+            <input required name="os0" class="input" type="text" placeholder="Living room">
             <span class="icon is-small is-left"><i class="fas fa-door-open"></i></span>
           </div>
         </div>
@@ -59,20 +61,34 @@ styles: |
         <div class="field">
           <label class="label">What kind of art would you like?</label>
           <div class="control">
-            <label class="radio" onclick="select('samples')">
+            <label class="radio" onclick="selectPreference('samples')">
               <input type="radio" name="art">
               Pick from samples
             </label>
             <br>
-            <label class="radio" onclick="select('description')">
+            <label class="radio" onclick="selectPreference('description')">
               <input type="radio" name="art">
               Use your own words
             </label>
             <br>
-            <label class="radio" onclick="select('surprise')">
+            <label class="radio" onclick="selectPreference('surprise')">
               <input type="radio" name="art">
               Start with a surprise
             </label>
+          </div>
+        </div>
+
+        <div class="field is-hidden" id="samples">
+          <div class="columns is-multiline is-mobile">
+            {% include profile-option.html name="abstract" dimmensions="3by4" %}
+            {% include profile-option.html name="animal" dimmensions="3by4" %}
+            {% include profile-option.html name="architecture" dimmensions="3by4" %}
+            {% include profile-option.html name="techonology" dimmensions="3by4" %}
+            {% include profile-option.html name="food" dimmensions="3by4" %}
+            {% include profile-option.html name="nature" dimmensions="3by4" %}
+            {% include profile-option.html name="city" dimmensions="4by3" %}
+            {% include profile-option.html name="people" dimmensions="4by3" %}
+            {% include profile-option.html name="words" dimmensions="4by3" %}
           </div>
         </div>
 
@@ -90,22 +106,7 @@ styles: |
           <div class="control has-icons-left">
             <textarea
               class="textarea"
-              placeholder="Tell us as much or as little as you like..."
-              id="description-input"></textarea>
-          </div>
-        </div>
-
-        <div class="field is-hidden" id="samples">
-          <div class="columns is-multiline is-mobile">
-            {% include profile-option.html name="abstract" dimmensions="3by4" %}
-            {% include profile-option.html name="animal" dimmensions="3by4" %}
-            {% include profile-option.html name="architecture" dimmensions="3by4" %}
-            {% include profile-option.html name="techonology" dimmensions="3by4" %}
-            {% include profile-option.html name="food" dimmensions="3by4" %}
-            {% include profile-option.html name="nature" dimmensions="3by4" %}
-            {% include profile-option.html name="city" dimmensions="4by3" %}
-            {% include profile-option.html name="people" dimmensions="4by3" %}
-            {% include profile-option.html name="words" dimmensions="4by3" %}
+              placeholder="Tell us as much or as little as you like..."></textarea>
           </div>
         </div>
 
@@ -131,35 +132,37 @@ styles: |
 </div>
 
 <script>
-  var art;
+  var presubmit;
 
-  function select(newArt) {
-    art = newArt;
-    ["samples", "description", "surprise"].forEach(function(value) {
+  var os1 = document.querySelector("input[name=os1]");
+
+  var prefenceSelectors = {
+    samples: submitWith(function() {
+      os1.value = Array
+        .from(document.querySelectorAll("#samples input:checked"))
+        .map(function(checkbox) { return checkbox.id })
+        .toString();
+    }),
+    description: submitWith(function() {
+      os1.value = document.getElementById("#description textarea").value;
+    }),
+    surprise: submitWith(function() {
+      os1.value = "surprise";
+    }),
+  };
+
+  function submitWith(pre) {
+    return function() {
+      pre();
+      return true;
+    };
+  }
+
+  function selectPreference(art) {
+    presubmit = prefenceSelectors[art];
+    Object.keys(prefenceSelectors).forEach(function(value) {
       document.getElementById(value).classList.toggle("is-hidden", value !== art);
     });
     document.getElementById("submit").classList.remove("is-hidden");
-  }
-
-  function presubmit() {
-    document.getElementById("custom-input").value = JSON.stringify([
-      document.getElementById("space-input").value, getArt()
-    ]);
-  }
-
-  function getArt() {
-    switch (art) {
-      case "samples":
-        return Array
-          .from(document.querySelectorAll("#samples input:checked"))
-          .map(function(checkbox) { return checkbox.id })
-          .toString();
-
-      case "description":
-        return document.getElementById("description-input").value;
-
-      case "surprise":
-        return "surprise";
-    }
   }
 </script>
