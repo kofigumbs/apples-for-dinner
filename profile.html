@@ -23,7 +23,10 @@ styles: |
 <div class="columns main-columns">
   <div class="column is-half hero-image">
     <div class="section">
-      <h1 class="title is-1">Enough about us.<br>Let's hear about you!</h1>
+      <h1 class="title is-1">
+        <p>Enough about us.</p>
+        <p>Let's hear about you!</p>
+      </h1>
     </div>
   </div>
 
@@ -33,14 +36,13 @@ styles: |
         <div class="notification is-danger">
           This page requires JavaScript. Please change your browser settings then refresh.
         </div>
-        <br>
       </noscript>
 
       {% if jekyll.environment == "production" %}
-      <form action="https://www.paypal.com/cgi-bin/webscr" method="POST" onsubmit="return presubmit()">
+      <form action="https://www.paypal.com/cgi-bin/webscr" method="POST">
         <input type="hidden" name="hosted_button_id" value="K2Q2RSWRGVRXY">
       {% else %}
-      <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="POST" onsubmit="return presubmit()">
+      <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="POST">
         <input type="hidden" name="hosted_button_id" value="4TJRU4BWR6VUE">
       {% endif %}
 
@@ -61,20 +63,24 @@ styles: |
         <div class="field">
           <label class="label">What kind of art would you like?</label>
           <div class="control">
-            <label class="radio" onclick="selectPreference('samples')">
-              <input type="radio" name="art">
-              Pick from samples
-            </label>
-            <br>
-            <label class="radio" onclick="selectPreference('description')">
-              <input type="radio" name="art">
-              Use your own words
-            </label>
-            <br>
-            <label class="radio" onclick="selectPreference('surprise')">
-              <input type="radio" name="art">
-              Start with a surprise
-            </label>
+            <p>
+              <label class="radio" data-art="samples">
+                <input type="radio" name="art">
+                Pick from samples
+              </label>
+            </p>
+            <p>
+              <label class="radio" data-art="description">
+                <input type="radio" name="art">
+                Use your own words
+              </label>
+            </p>
+            <p>
+              <label class="radio" data-art="surprise">
+                <input type="radio" name="art">
+                Start with a surprise
+              </label>
+            </p>
           </div>
         </div>
 
@@ -134,35 +140,34 @@ styles: |
 <script>
   var presubmit;
 
-  var os1 = document.querySelector("input[name=os1]");
-
-  var prefenceSelectors = {
-    samples: submitWith(function() {
-      os1.value = Array
+  var customSetters = {
+    samples: function(custom) {
+      custom.value = Array
         .from(document.querySelectorAll("#samples input:checked"))
         .map(function(checkbox) { return checkbox.id })
         .toString();
-    }),
-    description: submitWith(function() {
-      os1.value = document.getElementById("#description textarea").value;
-    }),
-    surprise: submitWith(function() {
-      os1.value = "surprise";
-    }),
+    },
+    description: function(custom) {
+      custom.value = document.querySelector("#description textarea").value;
+    },
+    surprise: function(custom) {
+      custom.value = "surprise";
+    },
   };
 
-  function submitWith(pre) {
-    return function() {
-      pre();
-      return true;
+  document.querySelectorAll("[data-art]").forEach(function(el) {
+    el.onclick = function() {
+      presubmit = customSetters[el.dataset.art];
+      Object.keys(customSetters).forEach(function(value) {
+        document.getElementById(value).classList.toggle("is-hidden", value !== el.dataset.art);
+      });
+      document.getElementById("submit").classList.remove("is-hidden");
     };
-  }
+  });
 
-  function selectPreference(art) {
-    presubmit = prefenceSelectors[art];
-    Object.keys(prefenceSelectors).forEach(function(value) {
-      document.getElementById(value).classList.toggle("is-hidden", value !== art);
-    });
-    document.getElementById("submit").classList.remove("is-hidden");
+  var form = document.querySelector("form").onsubmit = function() {
+    var os1 = document.querySelector("input[name=os1]");
+    presubmit(os1);
+    return true;
   }
 </script>
