@@ -4,6 +4,15 @@ photo_credits:
  - Sarah Dorweiler (old)
 ---
 <style>
+  .new-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  .new-info > *:not(first-child) {
+    margin-left: 0.50em;
+  }
   .page {
     position: relative;
     height: 100vh;
@@ -24,14 +33,14 @@ photo_credits:
     position: fixed;
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: center top;
+    background-position: left top;
   }
-  .index-hero-grayscale {
-    background-image: url(/images/index-hero.jpg);
+  .index-hero-before {
+    background-image: url(/images/index-hero-before.jpg);
     filter: grayscale(100%);
   }
-  .index-hero-frames {
-    background-image: url(/images/index-hero-frames.jpg);
+  .index-hero-after {
+    background-image: url(/images/index-hero-after.jpg);
   }
   .reading-light {
     background-color: rgba(255, 255, 255, 0.30);
@@ -62,10 +71,27 @@ photo_credits:
       width: 50%;
     }
   }
+  @media screen and (-webkit-min-device-pixel-ratio:0) { 
+    .clip {
+      clip: auto;
+      -webkit-mask-image: -webkit-linear-gradient(top, #ffffff 0%,#ffffff 100%)
+    }
+  }
 </style>
 
 <section class="page">
   <div class="hero is-fullheight reading-light">
+    <div class="hero-head has-background-info">
+      <div class="notification is-info has-text-centered">
+        <h3 class="subtitle new-info">
+          <span class="icon"><i class="fas fa-flag"></i></span>
+          <p>Like our new site?</p>
+          <a class="button is-info is-inverted has-text-weight-bold" href="blog/new-site">
+            Read the full story
+          </a>
+        </h3>
+      </div>
+    </div>
     <div class="hero-body">
       <div class="half">
         <h1 class="title is-1 is-spaced">
@@ -76,7 +102,7 @@ photo_credits:
           <span class="has-text-weight-bold">every season</span>
           — $15 / month
         </p>
-        <a class="button is-large is-link" href="/profile">Take our quiz</a>
+        <a class="button is-large is-info" href="/profile">Take our quiz</a>
       </div>
     </div>
     <div class="hero-footer has-text-centered">
@@ -86,18 +112,38 @@ photo_credits:
     </div>
   </div>
   <div class="clip">
-    <div class="clip-image index-hero-grayscale"></div>
+    <div class="clip-image index-hero-before"></div>
   </div>
 </section>
 
+{% capture index_content %}
+<div class="columns">
+  <div class="column is-half">
+    <div class="notification">
+      <p class="title">1</p>
+      <p>
+        Lorem ipsum dolor
+      </p>
+    </div>
+
+    <div class="notification">
+      <p class="title">2</p>
+      <p>
+        Lorem ipsum dolor
+      </p>
+    </div>
+  </div>
+</div>
+{% endcapture %}
+
 <section class="page">
   <div class="clip">
-    <div class="clip-image index-hero-frames"></div>
+    <div class="clip-image index-hero-after"></div>
   </div>
   <div class="is-hidden-mobile">
-    {% include index-content.html %}
+    {{ index_content }}
   </div>
 </section>
 <div class="is-hidden-tablet">
-  {% include index-content.html %}
+  {{ index_content }}
 </div>
