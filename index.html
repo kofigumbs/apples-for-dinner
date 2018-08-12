@@ -4,30 +4,32 @@ photo_credits:
  - Sarah Dorweiler (old)
 ---
 <style>
-  .new-info {
+  .announcement {
+    z-index: 1;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
   }
-  .new-info > *:not(first-child) {
+  .announcement > *:not(first-child) {
     margin-left: 0.50em;
   }
   .page {
     position: relative;
-    height: 100vh;
   }
   .clip {
-    pointer-events: none;
     position: absolute;
     clip: rect(auto, auto, auto, auto);
-    z-index: -1;
+    pointer-events: none;
   }
   .clip, .clip-image {
     top: 0;
     left 0;
     width: 100vw;
-    height: 100vh;
+  }
+  .page, .clip, .clip-image {
+    height: 100%;
+    min-height: 100vh;
   }
   .clip-image {
     position: fixed;
@@ -36,17 +38,29 @@ photo_credits:
     background-position: left top;
   }
   .index-hero-before {
-    background-image: url(/images/index-hero-before.jpg);
     filter: grayscale(100%);
+    background-image: url(/images/index-hero-before.jpg);
   }
   .index-hero-after {
     background-image: url(/images/index-hero-after.jpg);
   }
-  .reading-light {
+  .readable {
+    width: 100%;
+    height: 100%;
     background-color: rgba(255, 255, 255, 0.30);
   }
-  .half {
-    width: 100%;
+  .pre-steps {
+    height: 100vh;
+  }
+  .steps {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding 0 1em;
+    width: 100vw;
+    min-height: 100vh;
+    position: relative;
+    background-color: #363636;
   }
   .bounce {
     animation: bounce 2s infinite;
@@ -63,12 +77,18 @@ photo_credits:
     }
   }
   @media screen and (min-width: 769px) {
+    .announcement {
+      flex-direction: row;
+    }
     .clip, .clip-image {
       left: 50vw;
       width: 50vw;
     }
-    .half {
-      width: 50%;
+    .pre-steps {
+      height: 0;
+    }
+    .steps {
+      width: 50vw;
     }
   }
   @media screen and (-webkit-min-device-pixel-ratio:0) { 
@@ -80,70 +100,78 @@ photo_credits:
 </style>
 
 <section class="page">
-  <div class="hero is-fullheight reading-light">
+  <div class="clip">
+    <div class="clip-image index-hero-before">
+      <div class="readable"></div>
+    </div>
+  </div>
+  <div class="hero is-fullheight">
     <div class="hero-head has-background-info">
-      <div class="notification is-info has-text-centered">
-        <h3 class="subtitle new-info">
-          <span class="icon"><i class="fas fa-flag"></i></span>
-          <p>Like our new site?</p>
-          <a class="button is-info is-inverted has-text-weight-bold" href="blog/new-site">
-            Read the full story
-          </a>
-        </h3>
+      <div class="notification subtitle is-info announcement">
+        <p>Like our new site?</p>
+        <a class="button is-info is-inverted has-text-weight-bold" href="blog/new-site">
+          Read the full story
+        </a>
       </div>
     </div>
     <div class="hero-body">
-      <div class="half">
-        <h1 class="title is-1 is-spaced">
-          The simple, easy way to decorate
-        </h1>
-        <p class="subtitle">
-          4 new photos
-          <span class="has-text-weight-bold">every season</span>
-          — $15 / month
-        </p>
-        <a class="button is-large is-info" href="/profile">Take our quiz</a>
+      <div class="container is-fullhd">
+        <div class="columns">
+          <div class="column is-half">
+            <h1 class="title is-1 is-spaced">
+              The simple, easy way to decorate
+            </h1>
+            <p class="subtitle">
+              4 new photos
+              <span class="has-text-weight-bold">every season</span>
+              — $15 / month
+            </p>
+            <a class="button is-large is-info" href="/profile">Take our quiz</a>
+          </div>
+        </div>
       </div>
     </div>
     <div class="hero-footer has-text-centered">
-      <div class="half">
-        <span class="icon is-large bounce"><i class="fas fa-chevron-down"></i></span>
+      <div class="columns">
+        <div class="column is-half">
+          <span class="icon is-large bounce"><i class="fas fa-chevron-down"></i></span>
+        </div>
       </div>
     </div>
   </div>
-  <div class="clip">
-    <div class="clip-image index-hero-before"></div>
-  </div>
 </section>
-
-{% capture index_content %}
-<div class="columns">
-  <div class="column is-half">
-    <div class="notification">
-      <p class="title">1</p>
-      <p>
-        Lorem ipsum dolor
-      </p>
-    </div>
-
-    <div class="notification">
-      <p class="title">2</p>
-      <p>
-        Lorem ipsum dolor
-      </p>
-    </div>
-  </div>
-</div>
-{% endcapture %}
 
 <section class="page">
   <div class="clip">
     <div class="clip-image index-hero-after"></div>
   </div>
-  <div class="is-hidden-mobile">
-    {{ index_content }}
+  <div class="pre-steps"></div>
+  <div class="steps">
+    <div class="notification is-dark">
+      <h2 class="title is-1">1</h2>
+      <h3 class="subtitle is-3">Tell us what you like</h3>
+      <p class="subtitle">
+        Take our <span class="has-text-weight-bold">short quiz</span>, so we can get to know you.
+        We curate all kinds of photography to find pieces <span class="has-text-weight-bold">unique to you</span>.
+      </p>
+    </div>
+    <div class="notification is-dark">
+      <h2 class="title is-1">2</h2>
+      <h3 class="subtitle is-3">Get your framed photography</h3>
+      <p class="subtitle">
+        Your first package will include <span class="has-text-weight-bold">4 pieces and 4 frames</span>.
+      </p>
+    </div>
+    <div class="notification is-dark">
+      <h2 class="title is-1">3</h2>
+      <h3 class="subtitle is-3">New photos every quarter</h3>
+      <p class="subtitle">
+        Reuse the same frames and keep the old photography for your personal collection!
+      </p>
+    </div>
   </div>
 </section>
-<div class="is-hidden-tablet">
-  {{ index_content }}
-</div>
+
+<section class="section">
+  <h1 class="title is-1">Hello</h1>
+</section>
