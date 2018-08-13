@@ -4,12 +4,16 @@ photo_credits:
  - Sarah Dorweiler (old)
 ---
 <style>
+  body {
+    overflow-x: hidden;
+  }
   .announcement {
     z-index: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    border-radius: 0;
   }
   .announcement > *:not(first-child) {
     margin-left: 0.50em;
@@ -56,7 +60,7 @@ photo_credits:
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding 0 1em;
+    padding: 2em;
     width: 100vw;
     min-height: 100vh;
     position: relative;
@@ -151,15 +155,14 @@ photo_credits:
       <h2 class="title is-1">1</h2>
       <h3 class="subtitle is-3">Tell us what you like</h3>
       <p class="subtitle">
-        Take our <span class="has-text-weight-bold">short quiz</span>, so we can get to know you.
-        We curate all kinds of photography to find pieces <span class="has-text-weight-bold">unique to you</span>.
+        Take our short quiz, so we can get to know you.  We curate pieces unique to you.
       </p>
     </div>
     <div class="notification is-dark">
       <h2 class="title is-1">2</h2>
       <h3 class="subtitle is-3">Get your framed photography</h3>
       <p class="subtitle">
-        Your first package will include <span class="has-text-weight-bold">4 pieces and 4 frames</span>.
+        Your first package will include 4 pieces and 4 frames.
       </p>
     </div>
     <div class="notification is-dark">
@@ -172,6 +175,46 @@ photo_credits:
   </div>
 </section>
 
-<section class="section">
-  <h1 class="title is-1">Hello</h1>
+<section class="hero is-fullheight">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title is-1">Next steps</h1>
+      <div class="columns">
+        <div class="column">
+          <div class="notification is-info">
+            <p class="subtitle">
+            Want more samples?
+            Jump straight to the quiz and see all the categories.
+            </p>
+            <a class="button is-info has-text-weight-bold" href="/profile">
+              <span class="icon"><i class="fas fa-user"></i></span>
+              <span>Sign up now</span>
+            </a>
+          </div>
+        </div>
+        <div class="column">
+          <div class="notification is-white">
+            <p class="subtitle">
+              TODO
+            </p>
+            <a class="button is-white has-text-weight-bold" href="/about">
+              <span class="icon"><i class="fas fa-info-circle"></i></span>
+              <span>Read our story</span>
+            </a>
+          </div>
+        </div>
+        <div class="column">
+          <div class="notification is-light">
+            <p class="subtitle">
+              TODO
+            </p>
+            <a class="button is-light has-text-weight-bold" href="/pricing">
+              <span class="icon"><i class="fas fa-money-check-alt"></i></span>
+              <span>View pricing details</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
