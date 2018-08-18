@@ -1,17 +1,19 @@
-<div class="card image-row-card">
-  <div class="card-content">
-    <div class="image-row">
-      {% for i in (1..4) %}
-        <img src="/images/profile-option/{{ include.name }}{{ i }}.jpg" alt="{{ include.name }} picture #{{ i }}">
-      {% endfor %}
+<label for="{{ include.name }}">
+  <div class="card image-row-card">
+    <div class="card-content">
+      <div class="image-row">
+        {% for i in (1..4) %}
+          <img src="/images/profile-option/{{ include.name }}{{ i }}.jpg" alt="{{ include.name }} picture #{{ i }}">
+        {% endfor %}
+      </div>
+    </div>
+    <div class="card-footer">
+      <div class="card-footer-item">
+        <p class="heading">
+          <input type="checkbox" id="{{ include.name }}">
+          I like these!
+        </p>
+      </div>
     </div>
   </div>
-  <div class="card-footer">
-    <div class="card-footer-item">
-      <label class="heading">
-        <input type="checkbox" id="{{ include.name }}">
-        I like these!
-      </label>
-    </div>
-  </div>
-</div>
+</label>
