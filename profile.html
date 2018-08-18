@@ -1,145 +1,131 @@
 ---
 title: Quiz
-photo_credits: Becca Tapert
-styles: |
-  .main-columns {
-    margin: 0;
-    margin-bottom: 0 !important;
-  }
-  .hero-image {
-    height: 100vh;
-    background-image: url(/images/profile-hero.jpg);
-    background-size: cover;
-    background-repeat: no-repeat;
-  }
-  @media screen and (min-width: 769px) {
-    .hero-image {
-      top: 0;
-      position: sticky;
-    }
-  }
+layout: narrow
 ---
+<h1 class="title is-1">
+  <p>Enough about us.</p>
+  <p>Let's hear about you!</p>
+</h1>
 
-<div class="columns main-columns">
-  <div class="column is-half hero-image">
-    <div class="section">
-      <h1 class="title is-1">
-        <p>Enough about us.</p>
-        <p>Let's hear about you!</p>
-      </h1>
+<noscript>
+  <div class="notification is-danger">
+    This page requires JavaScript. Please change your browser settings then refresh.
+  </div>
+</noscript>
+
+{% if jekyll.environment == "production" %}
+<form action="https://www.paypal.com/cgi-bin/webscr" method="POST">
+  <input type="hidden" name="hosted_button_id" value="K2Q2RSWRGVRXY">
+{% else %}
+<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="POST">
+  <input type="hidden" name="hosted_button_id" value="4TJRU4BWR6VUE">
+{% endif %}
+
+  <input type="hidden" name="cmd" value="_s-xclick">
+  <input type="hidden" name="charset" value="utf-8">
+  <input type="hidden" name="on0" value="Space">
+  <input type="hidden" name="on1" value="Preferences">
+  <input type="hidden" name="os1">
+
+  <div class="field">
+    <label class="label">What kind of art would you like?</label>
+    <div class="control">
+      <p>
+        <label class="radio" data-art="samples">
+          <input required checked type="radio" name="art">
+          Pick from our samples
+        </label>
+      </p>
+      <p>
+        <label class="radio" data-art="description">
+          <input required type="radio" name="art">
+          Use your own words
+        </label>
+      </p>
+      <p>
+        <label class="radio" data-art="surprise">
+          <input required type="radio" name="art">
+          Start with a surprise
+        </label>
+      </p>
     </div>
   </div>
 
-  <div class="column is-one-half">
-    <div class="section">
-      <noscript>
-        <div class="notification is-danger">
-          This page requires JavaScript. Please change your browser settings then refresh.
-        </div>
-      </noscript>
+  <div class="field" id="samples">
+    <style>
+      .image-row {
+        width: 100%;
+        white-space: nowrap;
+        overflow-x: scroll;
+        overflow-y: hidden;
+        cursor: pointer;
+      }
+      .image-row > * {
+        display: inline-block;
+        height: 100%;
+        max-height: 15em;
+      }
+      .image-row-card {
+        margin-bottom: 2em;
+      }
+    </style>
+    {% include profile-option.html name="animals" %}
+    {% include profile-option.html name="architecture" %}
+    {% include profile-option.html name="city" %}
+    {% include profile-option.html name="food" %}
+    {% include profile-option.html name="outdoors" %}
+    {% include profile-option.html name="technology" %}
+    {% include profile-option.html name="words" %}
+  </div>
 
-      {% if jekyll.environment == "production" %}
-      <form action="https://www.paypal.com/cgi-bin/webscr" method="POST">
-        <input type="hidden" name="hosted_button_id" value="K2Q2RSWRGVRXY">
-      {% else %}
-      <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="POST">
-        <input type="hidden" name="hosted_button_id" value="4TJRU4BWR6VUE">
-      {% endif %}
-
-        <input type="hidden" name="cmd" value="_s-xclick">
-        <input type="hidden" name="charset" value="utf-8">
-        <input type="hidden" name="on0" value="Space">
-        <input type="hidden" name="on1" value="Preferences">
-        <input type="hidden" name="os1">
-
-        <div class="field">
-          <label class="label">What kind of space are you styling?</label>
-          <div class="control has-icons-left">
-            <input required name="os0" class="input" type="text" placeholder="Living room">
-            <span class="icon is-small is-left"><i class="fas fa-door-open"></i></span>
-          </div>
-        </div>
-
-        <div class="field">
-          <label class="label">What kind of art would you like?</label>
-          <div class="control">
-            <p>
-              <label class="radio" data-art="samples">
-                <input type="radio" name="art">
-                Pick from samples
-              </label>
-            </p>
-            <p>
-              <label class="radio" data-art="description">
-                <input type="radio" name="art">
-                Use your own words
-              </label>
-            </p>
-            <p>
-              <label class="radio" data-art="surprise">
-                <input type="radio" name="art">
-                Start with a surprise
-              </label>
-            </p>
-          </div>
-        </div>
-
-        <div class="field is-hidden" id="samples">
-          <div class="columns is-multiline is-mobile">
-            {% include profile-option.html name="abstract" dimmensions="3by4" %}
-            {% include profile-option.html name="animal" dimmensions="3by4" %}
-            {% include profile-option.html name="architecture" dimmensions="3by4" %}
-            {% include profile-option.html name="techonology" dimmensions="3by4" %}
-            {% include profile-option.html name="food" dimmensions="3by4" %}
-            {% include profile-option.html name="nature" dimmensions="3by4" %}
-            {% include profile-option.html name="city" dimmensions="4by3" %}
-            {% include profile-option.html name="people" dimmensions="4by3" %}
-            {% include profile-option.html name="words" dimmensions="4by3" %}
-          </div>
-        </div>
-
-        <div class="field is-hidden" id="description">
-          <div class="notification">
-            <i>I enjoy spending time outdoors, by water in particular.
-            I think I'd want to start with serene pictures of nature.
-            Most of my furniture is light beige,
-            so I'd want the photos to match that.</i>
-            <p class="has-text-right">
-              — Sam
-              <span class="icon is-small"><i class="fas fa-user"></i></span>
-            </p>
-          </div>
-          <div class="control has-icons-left">
-            <textarea
-              class="textarea"
-              placeholder="Tell us as much or as little as you like..."></textarea>
-          </div>
-        </div>
-
-        <div class="field is-hidden" id="surprise">
-          <div class="control">
-            <div class="notification">
-              OK! We'll send you some of our favorites then get your feedback.
-            </div>
-          </div>
-        </div>
-        <br>
-        <div class="field is-hidden" id="submit">
-          <div class="control">
-            <button class="button is-link is-large" type="submit" title="Subscribe with PayPal">
-              <span class="icon is-large"><i class="fab fa-paypal"></i></span>
-              <span>Subscribe</span>
-            </button>
-          </div>
-        </div>
-      </form>
+  <div class="field is-hidden" id="description">
+    <div class="notification">
+      <i>I enjoy spending time outdoors, by water in particular.
+      I think I'd want to start with serene pictures of nature.
+      Most of my furniture is light beige,
+      so I'd want the photos to match that.</i>
+      <p class="has-text-right">
+        — Sam
+        <span class="icon is-small"><i class="fas fa-user"></i></span>
+      </p>
+    </div>
+    <div class="control has-icons-left">
+      <textarea
+        class="textarea"
+        placeholder="Tell us as much or as little as you like..."></textarea>
     </div>
   </div>
-</div>
+
+  <div class="field is-hidden" id="surprise">
+    <div class="control">
+      <div class="notification">
+        OK! We'll send you some of our favorites then get your feedback.
+      </div>
+    </div>
+  </div>
+
+  <div class="field">
+    <label class="label">What kind of space are you styling?</label>
+    <div class="control has-icons-left">
+      <input required name="os0" class="input" type="text" placeholder="Living room">
+      <span class="icon is-small is-left"><i class="fas fa-door-open"></i></span>
+    </div>
+  </div>
+
+  <div class="field">
+    <p class="content">
+      By clicking Subscribe, you agree to our <a href="/terms">terms of service</a>.
+    </p>
+    <div class="control">
+      <button class="button is-link is-large" type="submit" title="Subscribe with PayPal">
+        <span class="icon is-large"><i class="fab fa-paypal"></i></span>
+        <span>Subscribe</span>
+      </button>
+    </div>
+  </div>
+</form>
 
 <script>
-  var presubmit;
-
   var customSetters = {
     samples: function(custom) {
       custom.value = Array
@@ -155,17 +141,18 @@ styles: |
     },
   };
 
+  var presubmit = customSetters.samples;
+
   document.querySelectorAll("[data-art]").forEach(function(el) {
     el.onclick = function() {
       presubmit = customSetters[el.dataset.art];
       Object.keys(customSetters).forEach(function(value) {
         document.getElementById(value).classList.toggle("is-hidden", value !== el.dataset.art);
       });
-      document.getElementById("submit").classList.remove("is-hidden");
     };
   });
 
-  var form = document.querySelector("form").onsubmit = function() {
+  document.querySelector("form").onsubmit = function() {
     var os1 = document.querySelector("input[name=os1]");
     presubmit(os1);
     return true;

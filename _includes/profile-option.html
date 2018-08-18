@@ -1,14 +1,19 @@
-<div class="column is-4-desktop is-6-tablet is-12-mobile">
-  <div class="card">
-    <div class="card-image">
-      <figure class="image is-{{ include.dimmensions }}">
-        <img src="/images/profile-option-{{ include.name }}.jpg" alt="{{ include.name }} picture">
-      </figure>
-    </div>
+<label for="{{ include.name }}">
+  <div class="card image-row-card">
     <div class="card-content">
-      <div class="has-text-centered">
-        <input type="checkbox" id="{{ include.name }}">
+      <div class="image-row">
+        {% for i in (1..4) %}
+          <img src="/images/profile-option/{{ include.name }}{{ i }}.jpg" alt="{{ include.name }} picture #{{ i }}">
+        {% endfor %}
+      </div>
+    </div>
+    <div class="card-footer">
+      <div class="card-footer-item">
+        <p class="heading">
+          <input type="checkbox" id="{{ include.name }}">
+          I like these!
+        </p>
       </div>
     </div>
   </div>
-</div>
+</label>

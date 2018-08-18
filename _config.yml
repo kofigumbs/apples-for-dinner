@@ -1,11 +1,5 @@
 title: New framed art every season
 description: Apples for Dinner Subscription Box
 url: applesfordinner.com
-defaults:
-  -
-    scope:
-      path: ""
-    values:
-      layout: "default"
 plugins:
   - jekyll-seo-tag

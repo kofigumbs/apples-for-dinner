@@ -1,135 +1,223 @@
 ---
-photo_credits: Tim Gouw and Lefty Kasdaglis
-styles: |
-  mark {
-    background-color: #FF7842;
-  }
-  .hero-image {
-    background-image: url(/images/index-hero.jpg);
-    background-size: cover;
-    background-repeat: no-repeat;
-  }
-  .hero-image > * {
-    transform: translateY(-5em);
-  }
-  .banner-image {
-    background-image: url(/images/index-banner.jpg);
-    background-size: cover;
-    background-repeat: no-repeat;
-    min-height: 25em;
-  }
-  .banner-text {
-    margin: 0 2em;
-    word-wrap: break-word;
-  }
-  .banner-pricing {
-    margin-bottom: 0 !important;
-  }
-  .banner-pricing > * {
-    height: 25em;
-  }
-  .align-center {
-    align-items: center;
-  }
+layout: base
+photo_credits:
+ - Bernard Hermant
 ---
-<section class="hero is-fullheight">
-  <div class="hero-body hero-image">
-    <div class="container">
-      <h1 class="title is-1 is-spaced">
-        Curated art for your
-        <mark data-tags='["office", "nursery", "studio", "shop", "airbnb", "dorm"]'>home</mark>
-      </h1>
-      <p class="subtitle">
-        4 new pieces
-        <span class="has-text-weight-bold">every season</span>
-        — $15 / month
-      </p>
-      <a class="button is-large is-white" href="/profile">Take our quiz</a>
+<style>
+  body {
+    overflow-x: hidden;
+  }
+  .announcement {
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0;
+  }
+  .announcement > *:not(first-child) {
+    margin-left: 0.50em;
+  }
+  .page {
+    position: relative;
+  }
+  .clip {
+    position: absolute;
+    clip: rect(auto, auto, auto, auto);
+    pointer-events: none;
+  }
+  .clip, .clip-image {
+    top: 0;
+    left 0;
+    width: 100vw;
+  }
+  .page, .clip, .clip-image {
+    height: 100%;
+    min-height: 100vh;
+  }
+  .clip-image {
+    position: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: left top;
+  }
+  .index-hero-before {
+    filter: grayscale(100%);
+    background-image: url(/images/index-hero-before.jpg);
+  }
+  .index-hero-after {
+    background-image: url(/images/index-hero-after.jpg);
+  }
+  .readable {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.30);
+  }
+  .pre-steps {
+    height: 100vh;
+  }
+  .steps {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2em;
+    width: 100vw;
+    min-height: 100vh;
+    position: relative;
+    background-color: #363636;
+  }
+  .bounce {
+    animation: bounce 2s infinite;
+  }
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-1.0em);
+    }
+    60% {
+      transform: translateY(-0.5em);
+    }
+  }
+  @media screen and (min-width: 769px) {
+    .announcement {
+      flex-direction: row;
+    }
+    .clip, .clip-image {
+      left: 50vw;
+      width: 50vw;
+    }
+    .pre-steps {
+      height: 0;
+    }
+    .steps {
+      width: 50vw;
+    }
+  }
+  @media screen and (-webkit-min-device-pixel-ratio:0) { 
+    .clip {
+      clip: auto;
+      -webkit-mask-image: -webkit-linear-gradient(top, #ffffff 0%,#ffffff 100%)
+    }
+  }
+</style>
+
+<section class="page">
+  <div class="clip">
+    <div class="clip-image index-hero-before">
+      <div class="readable"></div>
+    </div>
+  </div>
+  <div class="hero is-fullheight">
+    <div class="hero-head has-background-info">
+      <div class="notification subtitle is-info announcement">
+        <p>Like our new site?</p>
+        <a class="button is-info is-inverted has-text-weight-bold" href="blog/new-site">
+          Read the full story
+        </a>
+      </div>
+    </div>
+    <div class="hero-body">
+      <div class="container is-fullhd">
+        <div class="columns">
+          <div class="column is-half">
+            <h1 class="title is-1 is-spaced">
+              The simple, personal way to decorate
+            </h1>
+            <p class="subtitle">
+              4 new photos
+              <span class="has-text-weight-bold">every season</span>,
+              curated just for you
+            </p>
+            <a class="button is-large is-info" href="/profile">Take our quiz</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-footer has-text-centered">
+      <div class="columns">
+        <div class="column is-half">
+          <span class="icon is-large bounce"><i class="fas fa-chevron-down"></i></span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="hero is-fullheight">
+<section class="page">
+  <div class="clip">
+    <div class="clip-image index-hero-after"></div>
+  </div>
+  <div class="pre-steps"></div>
+  <div class="steps">
+    <div class="notification is-dark">
+      <h2 class="title is-1">1</h2>
+      <h3 class="subtitle is-3">Tell us what you like</h3>
+      <p class="subtitle">
+        Take our short quiz, so we can get to know you.  We curate pieces unique to you.
+      </p>
+    </div>
+    <div class="notification is-dark">
+      <h2 class="title is-1">2</h2>
+      <h3 class="subtitle is-3">Get your framed photography</h3>
+      <p class="subtitle">
+        Your first package will include 4 pieces and 4 frames.
+      </p>
+    </div>
+    <div class="notification is-dark">
+      <h2 class="title is-1">3</h2>
+      <h3 class="subtitle is-3">New photos every quarter</h3>
+      <p class="subtitle">
+        Keep your space looking fresh with replacement photos every 3 months.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="hero is-fullheight is-white is-bold">
   <div class="hero-body">
-    <div class="container has-text-centered">
-      <h2 class="subtitle is-1">Simple</h2>
+    <div class="container">
+      <h1 class="title is-1">Next steps</h1>
       <div class="columns">
         <div class="column">
-          <div class="notification is-white">
-            <span class="icon is-large"><i class="fas fa-comment-alt fa-2x"></i></span>
-            <h3 class="title is-4">Tell us what you like</h3>
-            <p>
-              Take our <span class="has-text-weight-bold">short quiz</span>, so we can get to know you.
-              We curate all kinds of pictures to find pieces <span class="has-text-weight-bold">unique to you</span>.
+          <div class="notification is-info">
+            <p class="subtitle has-text-white">
+            Want more samples?
+            Jump straight to the quiz and see all the categories.
             </p>
+            <a class="button is-info has-text-weight-bold" href="/profile">
+              <span class="icon"><i class="fas fa-user"></i></span>
+              <span>Get started now</span>
+            </a>
+          </div>
+        </div>
+        <div class="column">
+          <div class="notification is-white">
+            <p class="subtitle">
+              We are a small team that believes decorating
+              should be simple and affordable.
+            </p>
+            <a class="button is-white has-text-weight-bold" href="/about">
+              <span class="icon"><i class="fas fa-info-circle"></i></span>
+              <span>Read our story</span>
+            </a>
           </div>
         </div>
         <div class="column">
           <div class="notification is-light">
-            <span class="icon is-large"><i class="fas fa-box-open fa-2x"></i></span>
-            <h3 class="title is-4">Get your framed pictures</h3>
-            <p>
-              Your first package will include <span class="has-text-weight-bold">4 pictures and 4 frames</span>.
-              After that, you'll get new pictures quarterly based on your tastes.
-              <span class="has-text-weight-bold">Reuse the same frames and keep the old pictures</span> for your personal collection!
+            <p class="subtitle">
+              It boils down to
+              <span class="has-text-weight-bold">$15 / month</span>.
+              Read the full breakdown to see everything included.
             </p>
-          </div>
-        </div>
-        <div class="column">
-          <div class="notification is-white">
-            <span class="icon is-large"><i class="fas fa-redo-alt fa-2x fa-flip-horizontal"></i></span>
-            <h3 class="title is-4">That's it</h3>
-            <p>
-              We tried hard to come up with a third step,
-              but we really couldn't. Just <span class="has-text-weight-bold">set it and forget it</span>.
-            </p>
+            <a class="button is-light has-text-weight-bold" href="/pricing">
+              <span class="icon"><i class="fas fa-money-check-alt"></i></span>
+              <span>View pricing details</span>
+            </a>
           </div>
         </div>
       </div>
     </div>
   </div>
 </section>
-
-<section class="columns">
-  <div class="column is-half banner-image"></div>
-  <br>
-  <div class="column is-half">
-    <div class="banner-text vcenter">
-      <h2 class="title is-1">The fine print</h2>
-      <div class="content">
-        <ul>
-          <li>Our current frames are 8" x 10", thin, black, and mat-less</li>
-          <li>Free shipping to anywhere in the US</li>
-          <li>We hope you love it, but you can cancel your subscription at any time</li>
-          <li class="has-text-weight-bold">Apples for Dinner makes a great gift</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="columns banner-pricing">
-  <div class="column is-half">
-    <div class="vcenter align-center">
-      <h2 class="title is-1">$15</h2>
-      <h3 class="subtitle">per month</h3>
-      <a class="button is-dark is-large" href="/profile">Take our quiz</a>
-    </div>
-  </div>
-  <div class="column is-half has-background-light">
-    <div class="vcenter banner-text has-text-centered">
-      <h2 class="subtitle is-2 has-text-weight-light">
-        <p>Discover your next</p>
-        <p class="has-text-weight-bold"><mark data-tags='["conversation starter", "personal aesthetic"]'>favorite artist</mark></p>
-      </h2>
-    </div>
-  </div>
-</section>
-
-<script>
-  document.querySelectorAll('[data-tags]').forEach(function(el) {
-    var index = 0;
-    var words = JSON.parse(el.dataset.tags).concat([el.innerHTML.toString()]);
-    setInterval(function() { el.innerHTML = words[index++ % words.length] }, 1500);
-  });
-</script>
