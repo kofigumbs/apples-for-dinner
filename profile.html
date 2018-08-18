@@ -41,7 +41,7 @@ layout: narrow
       <p>
         <label class="radio" data-art="samples">
           <input type="radio" name="art">
-          Pick from samples
+          Pick from our samples
         </label>
       </p>
       <p>
@@ -59,14 +59,31 @@ layout: narrow
     </div>
   </div>
 
+  <style>
+    .image-row {
+      width: 100%;
+      white-space: nowrap;
+      overflow-x: scroll;
+      overflow-y: hidden;
+    }
+    .image-row > * {
+      display: inline-block;
+      height: 100%;
+      max-height: 15em;
+    }
+    .image-row-card:not(:last-child) {
+      margin-bottom: 2em;
+    }
+  </style>
+
   <div class="field is-hidden" id="samples">
     {% include profile-option.html name="animals" %}
-    <br>{% include profile-option.html name="architecture" %}
-    <br>{% include profile-option.html name="city" %}
-    <br>{% include profile-option.html name="food" %}
-    <br>{% include profile-option.html name="outdoors" %}
-    <br>{% include profile-option.html name="technology" %}
-    <br>{% include profile-option.html name="words" %}
+    {% include profile-option.html name="architecture" %}
+    {% include profile-option.html name="city" %}
+    {% include profile-option.html name="food" %}
+    {% include profile-option.html name="outdoors" %}
+    {% include profile-option.html name="technology" %}
+    {% include profile-option.html name="words" %}
   </div>
 
   <div class="field is-hidden" id="description">
