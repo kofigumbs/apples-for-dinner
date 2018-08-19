@@ -7,17 +7,6 @@ photo_credits:
   body {
     overflow-x: hidden;
   }
-  .announcement {
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border-radius: 0;
-  }
-  .announcement > *:not(first-child) {
-    margin-left: 0.50em;
-  }
   .page {
     position: relative;
   }
@@ -81,9 +70,6 @@ photo_credits:
     }
   }
   @media screen and (min-width: 769px) {
-    .announcement {
-      flex-direction: row;
-    }
     .clip, .clip-image {
       left: 50vw;
       width: 50vw;
@@ -110,14 +96,6 @@ photo_credits:
     </div>
   </div>
   <div class="hero is-fullheight">
-    <div class="hero-head has-background-info">
-      <div class="notification subtitle is-info announcement">
-        <p>Like our new site?</p>
-        <a class="button is-info is-inverted has-text-weight-bold" href="blog/new-site">
-          Read the full story
-        </a>
-      </div>
-    </div>
     <div class="hero-body">
       <div class="container is-fullhd">
         <div class="columns">
@@ -130,7 +108,12 @@ photo_credits:
               <span class="has-text-weight-bold">every season</span>,
               curated just for you
             </p>
-            <a class="button is-large is-info" href="/profile">Take our quiz</a>
+            <div class="buttons">
+              <a class="button is-large is-info" href="/profile">Take our quiz</a>
+              <a class="button is-large is-info is-inverted" href="blog/new-site">
+                <span>Read about our redesign</span>
+              </a>
+            </div>
           </div>
         </div>
       </div>
