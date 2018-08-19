@@ -8,6 +8,11 @@ layout: base
       <a class="navbar-item" href="/">
         <span class="heading is-marginless">□ Apples for Dinner</span>
       </a>
+      <a class="navbar-burger" role="button" aria-label="menu">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
     </div>
     <div class="navbar-menu">
       <div class="navbar-end">
@@ -18,6 +23,16 @@ layout: base
     </div>
   </nav>
 </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var menu = document.querySelector(".navbar-burger")
+    menu.addEventListener("click", function() {
+      menu.classList.toggle("is-active");
+      document.querySelector(".navbar-menu").classList.toggle("is-active");
+    });
+  });
+</script>
 
 <div class="section">
   <div class="container">
