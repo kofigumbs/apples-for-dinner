@@ -3,30 +3,28 @@ title: Pricing
 layout: narrow
 ---
 <style>
-  .message-header > * {
-    margin: 0 auto;
+  .call-to-action {
+    padding-left: 1.25em;
+    padding-right: 1.25em;
+    justify-content: left;
   }
 </style>
 
-<h1 class="title is-1">$45 per payment</h1>
-<h2 class="subtitle">that's $15 / month — paid 4 times / year</h2>
+<h1 class="subtitle is-1">Everything Included</h1>
+<h1 class="title is-1 has-text-info">at $15 / month</h1>
+<h2 class="subtitle is-4">paid every 3 months</h2>
 
-<div class="message is-link is-large">
-  <div class="message-header">
-    <p>The <u>Everything Included</u> Plan</p>
-  </div>
-  <div class="message-body">
-    {% include pricing-feature.html icon="images" text="4 new photos every season" %}
-    {% include pricing-feature.html icon="vector-square" text='4 complimentary frames, 8x10"' %}
-    {% include pricing-feature.html icon="book-open" text="Notes about your photographers" %}
-    {% include pricing-feature.html icon="glasses" text="Personal curator who gets to knows you" %}
-    {% include pricing-feature.html icon="shipping-fast" text="Free shipping, anywhere in the US" %}
-  </div>
-</div>
+{% include pricing-feature.html icon="images" text="4 new photos every season" %}
+{% include pricing-feature.html icon="vector-square" text='4 complimentary frames, 8x10"' %}
+{% include pricing-feature.html icon="book-open" text="Notes about your photographers" %}
+{% include pricing-feature.html icon="glasses" text="Personal curator who gets to knows you" %}
+{% include pricing-feature.html icon="shipping-fast" text="Free shipping, anywhere in the US" %}
+{% include pricing-feature.html icon="ban" text="Cancel at any time" %}
 
-<p>
-  We think you'll love <em>Apples for Dinner</em>,
-  but you can cancel your subscription at any time.
-</p>
+<a class="button is-dark is-fullwidth is-size-4 call-to-action" href="/profile">
+  <span class="icon"><i class="fas fa-arrow-right"></i></span>
+  <span>Try the free quiz now!</span>
+</a>
+
 
 {% include newsletter.html %}
