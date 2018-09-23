@@ -534,7 +534,7 @@ empty =
 
 animatedTransition : Attribute msg
 animatedTransition =
-    style "transition" "all 75ms ease-in-out"
+    class "animated-transition"
 
 
 cityAttribute : Model -> Attribute msg
