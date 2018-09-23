@@ -179,7 +179,7 @@ viewFlavorDetails model =
         Nothing ->
             headingMessage
                 { before = span [ class "icon" ] [ i [ class "fas fa-hand-point-up" ] [] ]
-                , message = "Pick with a flavor to get started"
+                , message = "Pick a flavor to get started"
                 , after = empty
                 }
 
@@ -440,7 +440,7 @@ viewHiddenSelection surprise samples =
                 value "Surprise"
 
             else
-                value <| "Samples " ++ String.join ", " samples
+                value <| "Samples (" ++ String.join ", " samples ++ ")"
     in
     input [ type_ "hidden", name "os1", attr ] []
 
