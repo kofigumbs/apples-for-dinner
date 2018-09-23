@@ -2,10 +2,7 @@
 title: Quiz
 layout: narrow
 ---
-<h1 class="title is-1">
-  <p>Enough about us.</p>
-  <p>Let's hear about you!</p>
-</h1>
+<div id="elm"></div>
 
 <noscript>
   <div class="notification is-danger">
@@ -13,148 +10,30 @@ layout: narrow
   </div>
 </noscript>
 
-{% if jekyll.environment == "production" %}
-<form action="https://www.paypal.com/cgi-bin/webscr" method="POST">
-  <input type="hidden" name="hosted_button_id" value="K2Q2RSWRGVRXY">
-{% else %}
-<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="POST">
-  <input type="hidden" name="hosted_button_id" value="4TJRU4BWR6VUE">
-{% endif %}
-
-  <input type="hidden" name="cmd" value="_s-xclick">
-  <input type="hidden" name="charset" value="utf-8">
-  <input type="hidden" name="on0" value="Space">
-  <input type="hidden" name="on1" value="Preferences">
-  <input type="hidden" name="os1">
-
-  <div class="field">
-    <label class="label">What kind of art would you like?</label>
-    <div class="control">
-      <p>
-        <label class="radio" data-art="samples">
-          <input required checked type="radio" name="art">
-          Pick from our samples
-        </label>
-      </p>
-      <p>
-        <label class="radio" data-art="description">
-          <input required type="radio" name="art">
-          Use your own words
-        </label>
-      </p>
-      <p>
-        <label class="radio" data-art="surprise">
-          <input required type="radio" name="art">
-          Start with a surprise
-        </label>
-      </p>
-    </div>
-  </div>
-
-  <div class="field" id="samples">
-    <style>
-      .image-row {
-        width: 100%;
-        white-space: nowrap;
-        overflow-x: scroll;
-        overflow-y: hidden;
-        cursor: pointer;
-      }
-      .image-row > * {
-        display: inline-block;
-        height: 100%;
-        max-height: 15em;
-      }
-      .image-row-card {
-        margin-bottom: 2em;
-      }
-    </style>
-    {% include profile-option.html name="animals" %}
-    {% include profile-option.html name="architecture" %}
-    {% include profile-option.html name="city" %}
-    {% include profile-option.html name="food" %}
-    {% include profile-option.html name="outdoors" %}
-    {% include profile-option.html name="technology" %}
-    {% include profile-option.html name="words" %}
-  </div>
-
-  <div class="field is-hidden" id="description">
-    <div class="notification">
-      <i>I enjoy spending time outdoors, by water in particular.
-      I think I'd want to start with serene pictures of nature.
-      Most of my furniture is light beige,
-      so I'd want the photos to match that.</i>
-      <p class="has-text-right">
-        — Sam
-        <span class="icon is-small"><i class="fas fa-user"></i></span>
-      </p>
-    </div>
-    <div class="control has-icons-left">
-      <textarea
-        class="textarea"
-        placeholder="Tell us as much or as little as you like..."></textarea>
-    </div>
-  </div>
-
-  <div class="field is-hidden" id="surprise">
-    <div class="control">
-      <div class="notification">
-        OK! We'll send you some of our favorites then get your feedback.
-      </div>
-    </div>
-  </div>
-
-  <div class="field">
-    <label class="label">What kind of space are you styling?</label>
-    <div class="control has-icons-left">
-      <input required name="os0" class="input" type="text" placeholder="Living room">
-      <span class="icon is-small is-left"><i class="fas fa-door-open"></i></span>
-    </div>
-  </div>
-
-  <div class="field">
-    <p class="content">
-      By clicking Subscribe, you agree to our <a href="/terms">terms of service</a>.
-    </p>
-    <div class="control">
-      <button class="button is-link is-large" type="submit" title="Subscribe with PayPal">
-        <span class="icon is-large"><i class="fab fa-paypal"></i></span>
-        <span>Subscribe</span>
-      </button>
-    </div>
-  </div>
-</form>
-
-<script>
-  var customSetters = {
-    samples: function(custom) {
-      custom.value = Array
-        .from(document.querySelectorAll("#samples input:checked"))
-        .map(function(checkbox) { return checkbox.id })
-        .toString();
-    },
-    description: function(custom) {
-      custom.value = document.querySelector("#description textarea").value;
-    },
-    surprise: function(custom) {
-      custom.value = "surprise";
-    },
-  };
-
-  var presubmit = customSetters.samples;
-
-  document.querySelectorAll("[data-art]").forEach(function(el) {
-    el.onclick = function() {
-      presubmit = customSetters[el.dataset.art];
-      Object.keys(customSetters).forEach(function(value) {
-        document.getElementById(value).classList.toggle("is-hidden", value !== el.dataset.art);
-      });
-    };
-  });
-
-  document.querySelector("form").onsubmit = function() {
-    var os1 = document.querySelector("input[name=os1]");
-    presubmit(os1);
-    return true;
+<style>
+  .is-animated-float:hover {
+    box-shadow: 0 3rem 3rem -2.25rem rgba(10,10,10,.1);
+    -webkit-transform: translateY(-.5rem);
+    transform: translateY(-.5rem);
   }
+  .is-animated-shrink {
+    -webkit-transform: scale(0.95);
+    transform: scale(0.95);
+  }
+</style>
+
+<script type="text/javascript" src="elm.js"></script>
+<script type="text/javascript">
+  var flags = {
+    {% if jekyll.environment == "production" %}
+    formsparkAction: "https://submit-form.com/432d6383-5f62-4b77-a0ab-facce9cb5dbb",
+    paypalFormAction: "https://www.paypal.com/cgi-bin/webscr",
+    paypalButtonId: "K2Q2RSWRGVRXY"
+    {% else %}
+    formsparkAction: "https://submit-form.com/9ac6d5d7-700f-4bf1-b17d-c6e42922c16c",
+    paypalFormAction: "https://www.sandbox.paypal.com/cgi-bin/webscr",
+    paypalButtonId: "4TJRU4BWR6VUE"
+    {% endif %}
+  };
+  Elm.Main.init({ node: document.getElementById('elm'), flags: flags });
 </script>

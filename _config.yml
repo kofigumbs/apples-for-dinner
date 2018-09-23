@@ -3,3 +3,5 @@ description: Apples for Dinner Subscription Box
 url: applesfordinner.com
 plugins:
   - jekyll-seo-tag
+exclude:
+  - app/
