@@ -234,7 +234,7 @@ viewLocal model =
             , name "email"
             ]
         , viewSpaceInput { name = "space", value = model.space }
-        , viewInstructionsInput { name = "instructions", value = model.space }
+        , viewInstructionsInput { name = "instructions", value = model.instructions }
         , viewSubmitButton
             { icon = "fas fa-envelope"
             , text = "Get in touch"
