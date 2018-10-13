@@ -1,5 +1,5 @@
 title: New framed art every season
-description: Apples for Dinner Subscription Box
+description: AFD Subscription Box
 url: applesfordinner.com
 plugins:
   - jekyll-seo-tag
@@ -7,3 +7,6 @@ exclude:
   - app/
 include:
   - _redirects
+featured_blog:
+  title: Outsourcing everyday life
+  url: https://medium.com/@WeAreAFD/outsourcing-everyday-life-b71d7cd3e2e0
