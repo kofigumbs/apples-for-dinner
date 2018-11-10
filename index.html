@@ -1,225 +1,223 @@
 ---
 layout: base
-photo_credits:
- - Bernard Hermant
+head: |
+  <link rel="stylesheet" href="/vendor/cruip-ellie.min.css">
 ---
 <style>
-  body {
-    overflow-x: hidden;
+  .call-to-action-spacer {
+    width: 0;
+    transition: all 200ms;
   }
-  .call-to-action {
-    margin-bottom: 0.75em;
+  .button:hover .call-to-action-spacer,
+  .button:focus .call-to-action-spacer,
+  .button:active .call-to-action-spacer {
+    width: 8px;
   }
-  .page {
-    position: relative;
-  }
-  .clip {
-    position: absolute;
-    clip: rect(auto, auto, auto, auto);
-    pointer-events: none;
-  }
-  .clip, .clip-image {
-    top: 0;
-    left 0;
-    width: 100vw;
-  }
-  .page, .clip, .clip-image {
-    height: 100%;
-    min-height: 100vh;
-  }
-  .clip-image {
-    position: fixed;
-    background-size: cover;
+  .ellie-hero-square svg {
+    background-position: center;
     background-repeat: no-repeat;
-    background-position: left top;
+    background-size: cover;
   }
-  .index-hero-before {
-    filter: grayscale(100%);
-    background-image: url(/images/index-hero-before.jpg);
+  .ellie-hero-square-1 svg {
+    background-image: url("/images/profile-option/architecture4.jpg");
   }
-  .index-hero-after {
-    background-image: url(/images/index-hero-after.jpg);
+  .ellie-hero-square-2 svg {
+    background-image: url("/images/profile-option/outdoors4.jpg");
   }
-  .readable {
-    width: 100%;
-    height: 100%;
-    background-color: rgba(255, 255, 255, 0.30);
+  .ellie-hero-square-3 svg {
+    background-image: url("/images/profile-option/technology3.jpg");
   }
-  .pre-steps {
-    height: 100vh;
+  .ellie-hero-square-4 svg {
+    background-image: url("/images/profile-option/animals3.jpg");
   }
-  .steps {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 2em;
-    width: 100vw;
-    min-height: 100vh;
-    position: relative;
-    background-color: #363636;
+  .ellie-hero-square-5 svg {
+    background-image: url("/images/profile-option/words4.jpg");
   }
-  .step {
-    max-width: 35em;
-    width: 100%;
-    margin: 0 auto;
+  .ellie-hero-square-6 svg {
+    background-image: url("/images/profile-option/city2.jpg");
   }
-  .step-number {
-    font-size: 175%;
-    margin: 0 10px;
+  .ellie-hero-square-7 svg {
+    background-image: url("/images/profile-option/animals4.jpg");
   }
-  .bounce {
-    animation: bounce 2s infinite;
-  }
-  @keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {
-      transform: translateY(0);
-    }
-    40% {
-      transform: translateY(-1.0em);
-    }
-    60% {
-      transform: translateY(-0.5em);
-    }
-  }
-  @media screen and (min-width: 769px) {
-    .clip, .clip-image {
-      left: 50vw;
-      width: 50vw;
-    }
-    .pre-steps {
-      height: 0;
-    }
-    .steps {
-      width: 50vw;
-    }
-  }
-  @media screen and (-webkit-min-device-pixel-ratio:0) { 
-    .clip {
-      clip: auto;
-      -webkit-mask-image: -webkit-linear-gradient(top, #ffffff 0%,#ffffff 100%)
-    }
+  .ellie-hero-square-8 svg {
+    background-image: url("/images/profile-option/words1.jpg");
   }
 </style>
 
-<section class="page">
-  <div class="clip">
-    <div class="clip-image index-hero-before">
-      <div class="readable"></div>
-    </div>
-  </div>
-  <div class="hero is-fullheight">
-    <div class="hero-body">
-      <div class="container is-fullhd">
-        <div class="columns">
-          <div class="column is-half">
-            <h1 class="title is-1">
-              Let's Decorate!
+<div class="is-boxed">
+  <div class="body-wrap boxed-container">
+    <header class="site-header">
+      <div class="container">
+        <div class="site-header-inner">
+          <div class="brand header-brand">
+            <h1 class="m-0">
+              <span class="heading">□ Apples for Dinner</span>
             </h1>
-            <p class="subtitle">
-              4 new photos
-              <span class="has-text-weight-bold">every season</span>,
-              curated just for you
-            </p>
-            <p class="call-to-action">
-              <a class="button is-large is-info" href="/profile">Take our quiz</a>
-            </p>
-            <a class="tags has-addons" href="{{ site.featured_blog.url }}" target="_blank">
-              <span class="tag is-medium is-dark">New post!</span>
-              <span class="tag is-medium is-light">
-                {{ site.featured_blog.title }}
-                <span class="icon is-large"><i class="fas fa-arrow-right"></i></span>
-              </span>
-            </a>
           </div>
         </div>
       </div>
-    </div>
-    <div class="hero-footer has-text-centered">
-      <div class="columns">
-        <div class="column is-half">
-          <span class="icon is-large bounce"><i class="fas fa-chevron-down"></i></span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+    </header>
 
-<section class="page">
-  <div class="clip">
-    <div class="clip-image index-hero-after"></div>
-  </div>
-  <div class="pre-steps"></div>
-  <div class="steps">
-    <div class="notification is-dark step">
-      <h3 class="title is-3 has-text-weight-light">
-        <b class="step-number">1</b>Tell us what you like
-      </h3>
-      <p class="subtitle">
-        Take our short quiz, so we can get to know you.  We curate pieces unique to you.
-      </p>
-    </div>
-    <div class="notification is-dark step">
-      <h3 class="title is-3 has-text-weight-light">
-        <b class="step-number">2</b>Get your framed photography
-      </h3>
-      <p class="subtitle">
-        Your first package will include 4 pieces and 4 frames.
-      </p>
-    </div>
-    <div class="notification is-dark step">
-      <h3 class="title is-3 has-text-weight-light">
-        <b class="step-number">3</b>New photos every quarter
-      </h3>
-      <p class="subtitle">
-        Keep your space looking fresh with replacement photos every 3 months.
-      </p>
-    </div>
-  </div>
-</section>
+    <main>
+      <section class="ellie-hero">
+        <div class="container">
+          <div class="ellie-hero-inner">
+            <div class="ellie-hero-copy">
+              <h1 class="ellie-hero-title mt-0">Seasonal art for your home</h1>
+              <p class="ellie-hero-paragraph">
+                Decorating that's simple and affordable.
+                It's like having your own personal art curator&hellip; except it's only
+                <a href="/pricing">$15 / month</a>.
+              </p>
+              <div class="ellie-hero-form field field-grouped">
+                <a class="button is-info is-large is-fullwidth" href="/profile">
+                  <span>Take our quiz now</span>
+                  <span class="call-to-action-spacer"></span>
+                  <span class="icon"><i class="fa fa-arrow-right"></i></span>
+                </a>
+              </div>
+            </div>
+            <div class="ellie-hero-illustration">
+              <div class="ellie-hero-bg">
+                <svg width="720" height="635" xmlns="http://www.w3.org/2000/svg">
+                </svg>
+              </div>
+              <div class="ellie-hero-square ellie-hero-square-1 is-moving-object is-rotating">
+                <svg width="220" height="220" xmlns="http://www.w3.org/2000/svg">
+                </svg>
+              </div>
+              <div class="ellie-hero-square ellie-hero-square-2 is-moving-object is-rotating">
+                <svg width="88" height="88" xmlns="http://www.w3.org/2000/svg">
+                </svg>
+              </div>
+              <div class="ellie-hero-square ellie-hero-square-3 is-moving-object is-rotating">
+                <svg width="64" height="64" xmlns="http://www.w3.org/2000/svg">
+                </svg>
+              </div>
+              <div class="ellie-hero-square ellie-hero-square-4 is-moving-object is-rotating">
+                <svg width="320" height="320" xmlns="http://www.w3.org/2000/svg">
+                </svg>
+              </div>
+              <div class="ellie-hero-square ellie-hero-square-5 is-moving-object is-rotating">
+                <svg width="141" height="140" xmlns="http://www.w3.org/2000/svg">
+                </svg>
+              </div>
+              <div class="ellie-hero-square ellie-hero-square-6 is-moving-object is-rotating">
+                <svg width="128" height="128" xmlns="http://www.w3.org/2000/svg">
+                </svg>
+              </div>
+              <div class="ellie-hero-square ellie-hero-square-7 is-moving-object is-rotating">
+                <svg width="64" height="64" xmlns="http://www.w3.org/2000/svg">
+                </svg>
+              </div>
+              <div class="ellie-hero-square ellie-hero-square-8 is-moving-object is-rotating">
+                <svg width="40" height="40" xmlns="http://www.w3.org/2000/svg">
+                </svg>
+              </div>
+              <div class="ellie-hero-dots ellie-hero-dots-3 is-moving-object is-translating" data-translating-factor="160">
+                <svg width="98" height="59" xmlns="http://www.w3.org/2000/svg">
+                  <g fill="#00cfe0" fill-rule="evenodd">
+                    <path d="M26.314 0l2.899 1.334L30 4.157l-.926 2.688L26.314 8l-2.6-1.31L22 4.156l1.295-2.94z"/>
+                    <path fill-opacity=".64" d="M59.157 2l1.45.667L61 4.079l-.463 1.344-1.38.577-1.3-.655L57 4.079l.648-1.47z"/>
+                    <path fill-opacity=".24" d="M32.157 55l1.45.667.393 1.412-.463 1.344-1.38.577-1.3-.655L30 57.079l.648-1.47z"/>
+                    <path fill-opacity=".64" d="M3.235 29l2.175 1L6 32.118l-.695 2.016-2.07.866-1.95-.983L0 32.117l.972-2.204z"/>
+                    <path fill-opacity=".8" d="M39.235 25l2.175 1 .59 2.118-.695 2.016-2.07.866-1.95-.983-1.285-1.9.972-2.204z"/>
+                    <path fill-opacity=".48" d="M79.157 44l1.45.667.393 1.412-.463 1.344-1.38.577-1.3-.655L77 46.079l.648-1.47z"/>
+                    <path fill-opacity=".64" d="M89.157 29l1.45.667.393 1.412-.463 1.344-1.38.577-1.3-.655L87 31.079l.648-1.47z"/>
+                    <path fill-opacity=".48" d="M65.157 29l1.45.667.393 1.412-.463 1.344-1.38.577-1.3-.655L63 31.079l.648-1.47zM97.078 45l.725.333.197.706-.232.672-.69.289-.65-.328L96 46.04l.324-.735z"/>
+                  </g>
+                </svg>
+              </div>
+              <div class="ellie-hero-line ellie-hero-line-1">
+                <svg width="344" height="217" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <linearGradient x1="18.74%" y1="17.384%" x2="96.787%" y2="88.669%" id="line-1-a">
+                      <stop stop-color="#5D6AFF" stop-opacity="0" offset="0%"/>
+                      <stop stop-color="#5D6AFF" offset="53.489%"/>
+                      <stop stop-color="#5D6AFF" stop-opacity="0" offset="100%"/>
+                    </linearGradient>
+                  </defs>
+                  <path d="M340.86 180.664l2.281 3.287c-79.796 55.378-120.994 39.511-120.994-47.035 0-82.777-47.283-92.246-144.735-27.901-32.607 20.428-55.391 21.53-67.544 2.516C-1.882 93.147-3.092 56.053 5.987 0l3.948.64c-8.928 55.125-7.743 91.453 3.303 108.736 10.644 16.653 31.058 15.666 62.01-3.725 99.65-65.797 150.9-55.534 150.9 31.265 0 83.03 37.371 97.424 114.713 43.748z" fill="url(#line-1-a)" fill-rule="nonzero" transform="matrix(-1 0 0 1 343.141 0)"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-<section class="hero is-fullheight is-white is-bold">
-  <div class="hero-body">
-    <div class="container">
-      <h1 class="title is-1">Learn more</h1>
-      <div class="columns">
-        <div class="column">
-          <div class="notification is-info is-animated-float animated-transition">
-            <p class="subtitle has-text-white">
-            Want more samples?
-            Jump straight to the quiz and see all the categories.
-            </p>
-            <a class="button is-info has-text-weight-bold" href="/profile">
-              <span class="icon"><i class="fas fa-user"></i></span>
-              <span>Get started now</span>
-            </a>
+      <section class="features">
+        <div class="container">
+          <div class="features-inner section-inner">
+            <div class="features-wrap">
+              <div class="feature">
+                <div class="feature-inner">
+                  <div class="feature-header mb-16">
+                    <div class="feature-icon mr-16">
+                      <svg width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+                        <g fill-rule="nonzero" fill="none">
+                          <path d="M7 8H1a1 1 0 0 1-1-1V1a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1zM19 8h-6a1 1 0 0 1-1-1V1a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1z" fill="#4353FF"/>
+                          <path d="M19 20h-6a1 1 0 0 1-1-1v-6a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1z" fill="#00cfe0"/>
+                          <path d="M31 8h-6a1 1 0 0 1-1-1V1a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1z" fill="#4353FF"/>
+                          <path d="M7 20H1a1 1 0 0 1-1-1v-6a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1z" fill="#00cfe0"/>
+                          <path d="M7 32H1a1 1 0 0 1-1-1v-6a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1z" fill="#4353FF"/>
+                          <path d="M29.5 18h-3a.5.5 0 0 1-.5-.5v-3a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-.5.5z" fill="#00cfe0"/>
+                          <path d="M17.5 30h-3a.5.5 0 0 1-.5-.5v-3a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-.5.5zM29.5 30h-3a.5.5 0 0 1-.5-.5v-3a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-.5.5z" fill="#4353FF"/>
+                        </g>
+                      </svg>
+                    </div>
+                    <h4 class="feature-title m-0">Tell us what you like</h4>
+                  </div>
+                  <p class="text-sm mb-0">
+                    Take our short quiz, so we can get to know you.  We curate pieces unique to you.
+                  </p>
+                </div>
+              </div>
+              <div class="feature">
+                <div class="feature-inner">
+                  <div class="feature-header mb-16">
+                    <div class="feature-icon mr-16">
+                      <svg width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+                        <g fill-rule="nonzero" fill="none">
+                          <path d="M4 12H0V5a5.006 5.006 0 0 1 5-5h7v4H5a1 1 0 0 0-1 1v7z" fill="#00cfe0"/>
+                          <path d="M32 12h-4V5a1 1 0 0 0-1-1h-7V0h7a5.006 5.006 0 0 1 5 5v7zM12 32H5a5.006 5.006 0 0 1-5-5v-7h4v7a1 1 0 0 0 1 1h7v4z" fill="#4353FF"/>
+                          <path d="M27 32h-7v-4h7a1 1 0 0 0 1-1v-7h4v7a5.006 5.006 0 0 1-5 5z" fill="#00cfe0"/>
+                        </g>
+                      </svg>
+                    </div>
+                    <h4 class="feature-title m-0">Get your framed photography</h4>
+                  </div>
+                  <p class="text-sm mb-0">
+                    Your first package will include 4 pieces and 4 frames: ready to hang.
+                  </p>
+                </div>
+              </div>
+              <div class="feature">
+                <div class="feature-inner">
+                  <div class="feature-header mb-16">
+                    <div class="feature-icon mr-16">
+                      <svg width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+                        <g fill="none" fill-rule="nonzero">
+                          <path d="M16 9c2.206 0 4-1.794 4-4s-1.794-4-4-4-4 1.794-4 4 1.794 4 4 4z" fill="#4353FF"/>
+                          <path d="M27 9c2.206 0 4-1.794 4-4s-1.794-4-4-4-4 1.794-4 4 1.794 4 4 4z" fill="#00cfe0"/>
+                          <path d="M27 12c-2.206 0-4 1.794-4 4s1.794 4 4 4 4-1.794 4-4-1.794-4-4-4z" fill="#4353FF"/>
+                          <path d="M5 23c-2.206 0-4 1.794-4 4s1.794 4 4 4 4-1.794 4-4-1.794-4-4-4z" fill="#00cfe0"/>
+                          <path d="M27 23c-1.859 0-3.41 1.28-3.858 3h-3.284A3.994 3.994 0 0 0 17 23.142v-3.284c1.72-.447 3-2 3-3.858 0-2.206-1.794-4-4-4-1.859 0-3.41 1.28-3.858 3H8.858A3.994 3.994 0 0 0 6 12.142V8.858c1.72-.447 3-2 3-3.858 0-2.206-1.794-4-4-4S1 2.794 1 5c0 1.858 1.28 3.41 3 3.858v3.284c-1.72.447-3 2-3 3.858 0 2.206 1.794 4 4 4 1.859 0 3.41-1.28 3.858-3h3.284A3.994 3.994 0 0 0 15 19.858v3.284c-1.72.447-3 2-3 3.858 0 2.206 1.794 4 4 4 1.859 0 3.41-1.28 3.858-3h3.284c.447 1.72 2 3 3.858 3 2.206 0 4-1.794 4-4s-1.794-4-4-4z" fill="#4353FF"/>
+                        </g>
+                      </svg>
+                    </div>
+                    <h4 class="feature-title m-0">New photos every quarter</h4>
+                  </div>
+                  <p class="text-sm mb-0">
+                    Keep your home looking fresh with replacement photos every 3 months.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="column">
-          <div class="notification is-white is-animated-float animated-transition">
-            <p class="subtitle">
-              We are a small team that believes decorating
-              should be simple and affordable.
-            </p>
-            <a class="button is-white has-text-weight-bold" href="/about">
-              <span class="icon"><i class="fas fa-info-circle"></i></span>
-              <span>Read our story</span>
-            </a>
-          </div>
-        </div>
-        <div class="column">
-          <div class="notification is-light is-animated-float animated-transition">
-            <p class="subtitle">
-              It boils down to
-              <span class="has-text-weight-bold">$15 / month</span>.
-              Read the full breakdown to see everything included.
-            </p>
-            <a class="button is-light has-text-weight-bold" href="/pricing">
-              <span class="icon"><i class="fas fa-money-check-alt"></i></span>
-              <span>View pricing details</span>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
+      </section>
+    </main>
   </div>
-</section>
+</div>
+
+<script src="/vendor/cruip-ellie.min.js"></script>
