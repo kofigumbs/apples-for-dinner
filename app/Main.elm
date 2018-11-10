@@ -15,7 +15,7 @@ type alias Flags =
 
 type alias Model =
     { flags : Flags
-    , flavor : Maybe Flavor
+    , flavor : Flavor
     , customLocation : Location
     , selectedLocation : SelectedLocation
     , surprise : Bool
@@ -45,7 +45,7 @@ type SelectedLocation
 init : Flags -> ( Model, Cmd Msg )
 init flags =
     ( { flags = flags
-      , flavor = Nothing
+      , flavor = Original
       , customLocation = Location "" ""
       , selectedLocation = NoSelection
       , surprise = False
@@ -79,7 +79,7 @@ update msg ({ customLocation } as model) =
             s { model | samples = toggle sampleName model.samples }
 
         SelectFlavor flavor ->
-            s { model | flavor = Just flavor }
+            s { model | flavor = flavor }
 
         SelectLocation selection ->
             s { model | selectedLocation = selection }
@@ -110,7 +110,6 @@ toggle : a -> List a -> List a
 toggle needle haystack =
     if List.member needle haystack then
         List.filter ((/=) needle) haystack
-
     else
         needle :: haystack
 
@@ -146,7 +145,7 @@ view model =
 
 
 viewFlavor :
-    Maybe Flavor
+    Flavor
     -> { icon : String, title : List (Html Msg), description : String, selection : Flavor }
     -> Html Msg
 viewFlavor selected samples =
@@ -157,8 +156,8 @@ viewFlavor selected samples =
             , style "cursor" "pointer"
             , onClick <| SelectFlavor samples.selection
             , classList
-                [ ( "is-link", selected == Just samples.selection )
-                , ( "is-light", selected /= Just samples.selection )
+                [ ( "is-link", selected == samples.selection )
+                , ( "is-light", selected /= samples.selection )
                 ]
             ]
             [ h2
@@ -176,17 +175,10 @@ viewFlavor selected samples =
 viewFlavorDetails : Model -> Html Msg
 viewFlavorDetails model =
     case model.flavor of
-        Nothing ->
-            headingMessage
-                { before = span [ class "icon" ] [ i [ class "fas fa-hand-point-up" ] [] ]
-                , message = "Pick a flavor to get started"
-                , after = empty
-                }
-
-        Just Local ->
+        Local ->
             viewLocal model
 
-        Just Original ->
+        Original ->
             viewOriginal model
 
 
@@ -303,7 +295,6 @@ viewOriginal model =
                 ]
             , viewQuiz model [] []
             ]
-
         else
             [ headingMessage
                 { before = empty
@@ -438,7 +429,6 @@ viewHiddenSelection surprise samples =
         attr =
             if surprise then
                 value "Surprise"
-
             else
                 value <| "Samples (" ++ String.join ", " samples ++ ")"
     in
@@ -512,7 +502,6 @@ checkbox isChecked =
                 , attribute "aria-checked" "true"
                 , attribute "role" "checkbox"
                 ]
-
             else
                 [ class "far fa-square"
                 , attribute "aria-checked" "false"
