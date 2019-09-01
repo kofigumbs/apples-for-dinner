@@ -1,0 +1,9 @@
+[build]
+  command = "echo OK"
+  publish = "."
+
+[[redirects]]
+  from = "*"
+  to = "https://trainervision.com/story"
+  force = true
+  status = 302
