@@ -4,6 +4,6 @@
 
 [[redirects]]
   from = "*"
-  to = "https://trainervision.com/story"
+  to = "https://trainervision.com"
   force = true
   status = 302
